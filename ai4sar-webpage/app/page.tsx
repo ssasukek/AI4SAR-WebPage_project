@@ -1,64 +1,57 @@
-import Image from "next/image";
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="page">
+      {/* Top Navigation Bar */}
+      <header className="topbar">
+        <div className="logo">AI4SAR</div>
+
+        {/* Search */}
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search AI4SAR..."
+            className="search-input"
+          />
+        </div>
+
+        {/* Menu */}
+        <div className="menu">
+          <div className="menu-icon">
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="content">
+        <section className="hero">
+          <h1>AI for Search and Rescue</h1>
+          <p className="subtitle">
+            AI4SAR is a research initiative focused on supporting Search and
+            Rescue operations through intelligent data analysis, visualization,
+            and decision-support tools.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        </section>
+
+        <section className="about">
+          <h2>About AI4SAR</h2>
+          <p>
+            The AI4SAR project explores the integration of artificial
+            intelligence into search and rescue workflows. By combining
+            historical incident data, geospatial information, and machine
+            learning models, the system aims to enhance situational awareness
+            and support human decision-making during time-critical missions.
+          </p>
+
+          <p>
+            This web platform serves as a public-facing interface for the
+            project, providing background information, research context, and a
+            foundation for interactive dashboards and future AI-driven
+            demonstrations.
+          </p>
+        </section>
       </main>
     </div>
   );
