@@ -23,7 +23,7 @@ export default function Footer() {
               <Link href="/public/teams">View Members</Link>
             </li>
             <li>
-              <Link href="/public/login" className="login-link">
+              <Link href="/public/login">
                 Member Login &rarr;
               </Link>
             </li>

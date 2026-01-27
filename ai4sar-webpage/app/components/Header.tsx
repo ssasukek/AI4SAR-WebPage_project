@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <header className="topbar">
-      <div className="logo">AI4SAR</div>
+      <Link className="logo" href="/">AI4SAR</Link>
 
       <div className="search-container">
         <input
