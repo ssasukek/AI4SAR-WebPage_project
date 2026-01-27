@@ -14,8 +14,115 @@
   align-items: center;
   height: 64px;
   padding: 0 24px;
-  background-color: #0c0d0d;
+  background-color: #1f2933;
   color: white;
+}
+
+/* Middle Layer (Grid type) */
+.middle-layer {
+  flex: 1; /* Pushes the footer down if content is short */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  width: 100%;
+}
+
+.hero-text {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+
+.grid-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.card-image {
+  height: 200px;
+  background-color: #e2e8f0; /* Placeholder grey */
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  margin-top: 0;
+  color: #111827;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+/* Bottom Bar (footer) */
+.bottom-layer {
+  background-color: #1f2933; /* Slightly lighter than main bg */
+  color: #9ca3af;
+  padding: 48px 0px 24px 0;
+  border-top: 1px solid #374151;
+}
+
+.footer-content {
+  width: 100%;
+  padding: 0 24px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.footer-col h4 {
+  color: white;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: white;
+}
+
+.copyright {
+  max-width: 100%;
+  margin: 40px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid #374151;
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 .logo {
@@ -123,22 +230,7 @@
   font-size: 1.1rem;
   color: #4b5563;
   max-width: 700px;
-}
-
-/* About Section */
-.about {
-  margin-top: 56px;
-}
-
-.about h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.about p {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #374151;
-  margin-bottom: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
