@@ -26,30 +26,6 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        <div className="dashboard-controls">
-          <div className="control-group-left">
-            <input
-              type="text"
-              placeholder="Search incidents..."
-              className="dashboard-search"
-            />
-            <button className="action-btn btn-primary">
-              Create New Incident
-            </button>
-            <button className="action-btn btn-secondary">
-              Create New Folder
-            </button>
-          </div>
-
-          <select
-            className="dashboard-search"
-            style={{ maxWidth: "180px", flex: "none" }}
-          >
-            <option>Sort by Name ASC</option>
-            <option>Sort by Date DESC</option>
-          </select>
-        </div>
-
         <div className="incident-grid">
           {incidents.map((item) => (
             <div key={item.id} className="incident-card">
