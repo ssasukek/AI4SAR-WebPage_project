@@ -70,6 +70,13 @@
   margin-bottom: 8px;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #0c0d0d;
+}
+
 /* Bottom Bar (footer) */
 .bottom-layer {
   background-color: #1f2933; /* Slightly lighter than main bg */
@@ -235,4 +242,22 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.footer-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+}
+
+.auth-page {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
