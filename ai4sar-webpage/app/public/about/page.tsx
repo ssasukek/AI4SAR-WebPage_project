@@ -7,7 +7,7 @@ export default function AboutPage() {
     <div className="page">
       {/* Main Content Area */}
       <main className="content">
-        <section className="hero">
+        <section className="hero" style={{ textAlign: "center" }}>
           <h1>About the Project</h1>
           <p className="subtitle">
             Information about the team, the collaboration, and the goals of
