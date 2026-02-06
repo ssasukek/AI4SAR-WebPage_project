@@ -6,11 +6,6 @@ export default function Page() {
   return (
     <div className="auth-page">
       <SignIn
-        routing="path"
-        path="/public/login"
-        afterSignInUrl="/private/dashboard"
-        afterSignUpUrl="/private/dashboard"
-        
         appearance={{
           variables: {
             colorPrimary: "#1f2933",

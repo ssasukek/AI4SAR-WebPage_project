@@ -19,7 +19,9 @@ export default function Header() {
 
   return (
     <header className="topbar">
-      <Link className="logo" href="/">AI4SAR</Link>
+      <Link className="logo" href="/">
+        AI4SAR
+      </Link>
 
       <div className="search-container">
         <input
@@ -51,6 +53,9 @@ export default function Header() {
             </Link>
             <Link className="dropdown-item" href="/public/dashboard">
               Dashboard
+            </Link>
+            <Link className="dropdown-item" href="/public/about">
+              About
             </Link>
           </div>
         )}

@@ -1,20 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-
 export default function HomePage() {
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      if (!menuRef.current) return;
-      if (!menuRef.current.contains(e.target as Node)) setOpen(false);
-    }
-    document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
-  }, []);
-
   return (
     <div className="page" style={{ display: "flex", flexDirection: "column" }}>
       <main className="middle-layer">
