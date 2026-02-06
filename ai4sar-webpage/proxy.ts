@@ -25,10 +25,6 @@ export default clerkMiddleware(async (auth, req) => {
     return NextResponse.next();
   }
 
-  // for sign in user
-  const { userId } = await auth();
-  if (!userId) return NextResponse.redirect(new URL("/public/login", req.url));
-
   // admin 
   if (isAdminRoute(req)) {
     const { sessionClaims } = await auth();
