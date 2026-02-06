@@ -2,10 +2,17 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import {
+  SignedIn,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const { user } = useUser();
+  const isAdmin = user?.publicMetadata?.role === "admin";
 
   // Close menu when clicking outside of it
   useEffect(() => {
@@ -16,6 +23,10 @@ export default function Header() {
     document.addEventListener("mousedown", onDocClick);
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
+
+  function closeMenu() {
+    setOpen(false);
+  }
 
   return (
     <header className="topbar">
@@ -45,20 +56,56 @@ export default function Header() {
 
         {open && (
           <div className="dropdown">
-            <Link className="dropdown-item" href="/">
+            <Link className="dropdown-item" href="/" onClick={closeMenu}>
               Home
             </Link>
-            <Link className="dropdown-item" href="/public/background">
+            <Link
+              className="dropdown-item"
+              href="/public/background"
+              onClick={closeMenu}
+            >
               Background
             </Link>
-            <Link className="dropdown-item" href="/public/dashboard">
-              Dashboard
-            </Link>
-            <Link className="dropdown-item" href="/public/about">
+            <Link
+              className="dropdown-item"
+              href="/public/about"
+              onClick={closeMenu}
+            >
               About
             </Link>
+            <Link
+              className="dropdown-item"
+              href="/public/dashboard"
+              onClick={closeMenu}
+            >
+              Dashboard
+            </Link>
+
+            <SignedIn>
+              <Link
+                className="dropdown-item"
+                href="/private/dashboard"
+                onClick={closeMenu}
+              >
+                Private Dashboard
+              </Link>
+
+              {isAdmin && (
+                <Link
+                  className="dropdown-item"
+                  href="/private/admin/invite"
+                  onClick={closeMenu}
+                >
+                  Invite Usage (Admin)
+                </Link>
+              )}
+            </SignedIn>
           </div>
         )}
+        {/* Profile icon appears next to dropdown ONLY when signed in */}
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </header>
   );
