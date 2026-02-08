@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { db } from "../../Firebase-config";
+import { db } from "@/lib/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import {
   Navbar,
@@ -17,7 +17,6 @@ import {
   Button,
   Tooltip,
 } from "reactstrap";
-import { useAuth } from "../../contexts/AuthContext";
 
 interface FormHeaderProps {
   incidentId: string;
@@ -25,7 +24,7 @@ interface FormHeaderProps {
 
 interface IncidentData {
   incidentName?: string;
-  [key: string]: any; 
+  [key: string]: any;
 }
 
 const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
@@ -35,14 +34,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
   const [operationNumber, setOperationNumber] = useState<string>("");
 
   const toggle = () => setTooltipOpen(!tooltipOpen);
-  const router = useRouter(); 
-  const { signOut, currentUser } = useAuth();
-
-  const handleSignOut = () => {
-    signOut();
-    setIsOpen(false); // Close the navbar if open
-    router.push("/");
-  };
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, "incidents", incidentId), (doc) => {
@@ -66,7 +58,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
         fixed="top"
         light
       >
-        <NavbarBrand style={{ color: "white" }} href="/incidents">
+        <NavbarBrand style={{ color: "white" }} href="/private/incidents">
           IntelliSAR
         </NavbarBrand>
 
@@ -82,7 +74,11 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
           }}
         >
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav style={{ color: "white", padding: "0 15px 0 0" }}>
+            <DropdownToggle
+              caret
+              nav
+              style={{ color: "white", padding: "0 15px 0 0" }}
+            >
               All Forms
             </DropdownToggle>
             <DropdownMenu
@@ -91,122 +87,173 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
                 overflowY: "scroll", // Enable scrolling
                 scrollbarWidth: "thin", // For Firefox
                 msOverflowStyle: "auto", // For Internet Explorer
-                boxShadow: "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
+                boxShadow:
+                  "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
               }}
             >
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar100`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar100`)
+                }
               >
                 General Briefing - Generic Incident (SAR 100)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar100a`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar100a`)
+                }
               >
                 General Briefing - Missing Person (SAR 100A)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar104`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar104`)
+                }
               >
                 Team Assignment (SAR 104)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar110`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar110`)
+                }
               >
                 Team Debriefing (SAR 110)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar111`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar111`)
+                }
               >
                 Team Debriefing - Dog Supplement(SAR 111)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar112`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar112`)
+                }
               >
                 Team Debriefing - Area Search Supplement (SAR 112)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar115`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar115`)
+                }
               >
                 Team Debriefing - Tracking Team Supplement (SAR 115)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar116`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar116`)
+                }
               >
                 Team Debriefing - Hasty Search Supplement (SAR 116)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar119`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar119`)
+                }
               >
                 Team Debriefing Supplement (SAR 119)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar131`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar131`)
+                }
               >
                 Individual Availability Assignment (SAR 131)
               </DropdownItem>
-              <DropdownItem onClick={() => router.push(`/incidents/${incidentId}/sar132`)}>
+              <DropdownItem
+                onClick={() =>
+                  router.push(`/private/incidents/${incidentId}/sar132`)
+                }
+              >
                 Urban Interview Log (SAR 132)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar133`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar133`)
+                }
               >
                 Radio Log (SAR 133)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar134`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar134`)
+                }
               >
                 Clue Log (SAR 134)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar135`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar135`)
+                }
               >
                 Clue Report (SAR 135)
               </DropdownItem>
-              {/* <DropdownItem onClick={() => router.push(`/incidents/${operationNumber}/ics202`)}>
+              {/* <DropdownItem onClick={() => router.push(`/private/incidents/${operationNumber}/ics202`)}>
                                     Incident Objectives (ICS 202)
                                 </DropdownItem> */}
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics204`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics204`)
+                }
               >
                 Assignment List (ICS 204)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics205`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics205`)
+                }
               >
                 Incident Radio Communications Plan (ICS 205)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics206`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics206`)
+                }
               >
                 Medical Plan (ICS 206)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics211a`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics211a`)
+                }
               >
                 Agency Check In List (ICS 211A)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics211b`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics211b`)
+                }
               >
                 Check In List (ICS 211B)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics214`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics214`)
+                }
               >
                 Unit Log (ICS 214)
               </DropdownItem>
-              {/* <DropdownItem onClick={() => router.push(`/incidents/${operationNumber}/ics202`)}>
+              {/* <DropdownItem onClick={() => router.push(`/private/incidents/${operationNumber}/ics202`)}>
                                      Incident Objectives (ICS 202)
                                 </DropdownItem> */}
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/missingperson`)}
+                onClick={() =>
+                  router.push(
+                    `/private/incidents/${operationNumber}/missingperson`,
+                  )
+                }
               >
                 Missing Person Questionnaire
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav style={{ color: "white", padding: "0 15px 0 0" }}>
+            <DropdownToggle
+              caret
+              nav
+              style={{ color: "white", padding: "0 15px 0 0" }}
+            >
               Check-in and Briefing
             </DropdownToggle>
             <DropdownMenu
@@ -215,31 +262,42 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
                 overflowY: "scroll", // Enable scrolling
                 scrollbarWidth: "thin", // For Firefox
                 msOverflowStyle: "auto", // For Internet Explorer
-                boxShadow: "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
+                boxShadow:
+                  "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
               }}
             >
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar100`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar100`)
+                }
               >
                 General Briefing - Generic Incident (SAR 100)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar100a`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar100a`)
+                }
               >
                 General Briefing - Missing Person (SAR 100A)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar131`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar131`)
+                }
               >
                 Individual Availability Assignment (SAR 131)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics211a`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics211a`)
+                }
               >
                 Agency Check In List (ICS 211A)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics211b`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics211b`)
+                }
               >
                 Check In List (ICS 211B)
               </DropdownItem>
@@ -247,7 +305,11 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
           </UncontrolledDropdown>
 
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav style={{ color: "white", padding: "0 15px 0 0" }}>
+            <DropdownToggle
+              caret
+              nav
+              style={{ color: "white", padding: "0 15px 0 0" }}
+            >
               Assignment
             </DropdownToggle>
             <DropdownMenu
@@ -256,16 +318,21 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
                 overflowY: "scroll", // Enable scrolling
                 scrollbarWidth: "thin", // For Firefox
                 msOverflowStyle: "auto", // For Internet Explorer
-                boxShadow: "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
+                boxShadow:
+                  "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
               }}
             >
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar104`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar104`)
+                }
               >
                 Team Assignment (SAR 104)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics204`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics204`)
+                }
               >
                 Assignment List (ICS 204)
               </DropdownItem>
@@ -273,7 +340,11 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
           </UncontrolledDropdown>
 
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav style={{ color: "white", padding: "0 15px 0 0" }}>
+            <DropdownToggle
+              caret
+              nav
+              style={{ color: "white", padding: "0 15px 0 0" }}
+            >
               Debriefing
             </DropdownToggle>
             <DropdownMenu
@@ -282,41 +353,56 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
                 overflowY: "scroll", // Enable scrolling
                 scrollbarWidth: "thin", // For Firefox
                 msOverflowStyle: "auto", // For Internet Explorer
-                boxShadow: "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
+                boxShadow:
+                  "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
               }}
             >
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar110`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar110`)
+                }
               >
                 Team Debriefing (SAR 110)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar111`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar111`)
+                }
               >
                 Team Debriefing - Dog Supplement(SAR 111)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar112`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar112`)
+                }
               >
                 Team Debriefing - Area Search Supplement (SAR 112)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar113`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar113`)
+                }
               >
                 Team Debriefing - Equestrian Supplement (SAR 113)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar115`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar115`)
+                }
               >
                 Team Debriefing - Tracking Team Supplement (SAR 115)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar116`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar116`)
+                }
               >
                 Team Debriefing - Hasty Search Supplement (SAR 116)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar119`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar119`)
+                }
               >
                 Team Debriefing Supplement (SAR 119)
               </DropdownItem>
@@ -324,7 +410,11 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
           </UncontrolledDropdown>
 
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav style={{ color: "white", padding: "0 15px 0 0" }}>
+            <DropdownToggle
+              caret
+              nav
+              style={{ color: "white", padding: "0 15px 0 0" }}
+            >
               Clues
             </DropdownToggle>
             <DropdownMenu
@@ -333,21 +423,28 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
                 overflowY: "scroll", // Enable scrolling
                 scrollbarWidth: "thin", // For Firefox
                 msOverflowStyle: "auto", // For Internet Explorer
-                boxShadow: "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
+                boxShadow:
+                  "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
               }}
             >
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar132`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar132`)
+                }
               >
                 Urban Interview Log (SAR 132)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar134`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar134`)
+                }
               >
                 Clue Log (SAR 134)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar135`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar135`)
+                }
               >
                 Clue Report (SAR 135)
               </DropdownItem>
@@ -355,7 +452,11 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
           </UncontrolledDropdown>
 
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav style={{ color: "white", padding: "0 15px 0 0" }}>
+            <DropdownToggle
+              caret
+              nav
+              style={{ color: "white", padding: "0 15px 0 0" }}
+            >
               ICS
             </DropdownToggle>
             <DropdownMenu
@@ -364,36 +465,49 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
                 overflowY: "scroll", // Enable scrolling
                 scrollbarWidth: "thin", // For Firefox
                 msOverflowStyle: "auto", // For Internet Explorer
-                boxShadow: "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
+                boxShadow:
+                  "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
               }}
             >
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics204`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics204`)
+                }
               >
                 Assignment List (ICS 204)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics205`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics205`)
+                }
               >
                 Incident Radio Communications Plan (ICS 205)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics206`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics206`)
+                }
               >
                 Medical Plan (ICS 206)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics211a`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics211a`)
+                }
               >
                 Agency Check In List (ICS 211A)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics211b`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics211b`)
+                }
               >
                 Check In List (ICS 211B)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics214`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics214`)
+                }
               >
                 Unit Log (ICS 214)
               </DropdownItem>
@@ -401,7 +515,11 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
           </UncontrolledDropdown>
 
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav style={{ color: "white", padding: "0 15px 0 0" }}>
+            <DropdownToggle
+              caret
+              nav
+              style={{ color: "white", padding: "0 15px 0 0" }}
+            >
               Radio
             </DropdownToggle>
             <DropdownMenu
@@ -410,16 +528,21 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
                 overflowY: "scroll", // Enable scrolling
                 scrollbarWidth: "thin", // For Firefox
                 msOverflowStyle: "auto", // For Internet Explorer
-                boxShadow: "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
+                boxShadow:
+                  "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
               }}
             >
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/sar133`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/sar133`)
+                }
               >
                 Radio Log (SAR 133)
               </DropdownItem>
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/ics205`)}
+                onClick={() =>
+                  router.push(`/private/incidents/${operationNumber}/ics205`)
+                }
               >
                 Incident Radio Communications Plan (ICS 205)
               </DropdownItem>
@@ -427,7 +550,11 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
           </UncontrolledDropdown>
 
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav style={{ color: "white", padding: "0 15px 0 0" }}>
+            <DropdownToggle
+              caret
+              nav
+              style={{ color: "white", padding: "0 15px 0 0" }}
+            >
               Missing Person Questionnaire
             </DropdownToggle>
             <DropdownMenu
@@ -436,11 +563,16 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
                 overflowY: "scroll", // Enable scrolling
                 scrollbarWidth: "thin", // For Firefox
                 msOverflowStyle: "auto", // For Internet Explorer
-                boxShadow: "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
+                boxShadow:
+                  "inset 0px 10px 8px -10px rgba(0, 0, 0, 0.3), inset 0px -10px 8px -10px rgba(0, 0, 0, 0.3)", // Indicate scrollability
               }}
             >
               <DropdownItem
-                onClick={() => router.push(`/incidents/${operationNumber}/missingperson`)}
+                onClick={() =>
+                  router.push(
+                    `/private/incidents/${operationNumber}/missingperson`,
+                  )
+                }
               >
                 Missing Person Questionnaire
               </DropdownItem>
@@ -456,11 +588,6 @@ const FormHeader: React.FC<FormHeaderProps> = ({ incidentId }) => {
                 GitHub (For Testing Purposes)
               </NavLink>
             </NavItem>
-            {currentUser && (
-              <NavItem>
-                <Button onClick={() => handleSignOut()}>Sign Out</Button>
-              </NavItem>
-            )}
           </Nav>
         </Collapse>
       </Navbar>

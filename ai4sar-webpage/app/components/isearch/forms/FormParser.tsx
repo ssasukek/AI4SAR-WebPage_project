@@ -14,14 +14,23 @@ import {
   Table,
 } from "reactstrap";
 import formReducer from "../reducers/FormReducer";
-import { db, storage } from "../../Firebase-config";
+import { db } from "@/lib/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { collection, addDoc, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
-import { useAuth } from "../../contexts/AuthContext";
+import {
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import Submission from "./Submission";
 import fillForm from "../utils/FillForm";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import { GenericForm } from "./Form";
+import { storage } from "@/lib/firebase";
+import { useUser } from "@clerk/nextjs";
+
 
 var index1 = 0;
 
@@ -50,7 +59,9 @@ const FormatSection = async (section) => {
         field.columns.forEach((col) => {
           field.values[combineTableFieldName(field.dynamicTable, "", col)] = [];
           field.rows.forEach((row) => {
-            field.values[combineTableFieldName(field.dynamicTable, "", col)].push("");
+            field.values[
+              combineTableFieldName(field.dynamicTable, "", col)
+            ].push("");
           });
         });
       }
@@ -119,7 +130,9 @@ const StandardField = ({ field, indexList, dispatch, currentUser }) => {
     >
       <Label
         style={
-          field.type === "checkbox" ? { marginTop: "5px", marginRight: "10px" } : {}
+          field.type === "checkbox"
+            ? { marginTop: "5px", marginRight: "10px" }
+            : {}
         }
         for={field.name}
       >
@@ -170,7 +183,9 @@ const DynamicField = ({ field, indexList, dispatch }) => {
                   type: "HANDLE DYNAMIC TEXT",
                   indexList: indexList,
                   payload:
-                    field.type === "checkbox" ? e.target.checked : e.target.value,
+                    field.type === "checkbox"
+                      ? e.target.checked
+                      : e.target.value,
                   index: index,
                 })
               }
@@ -249,7 +264,11 @@ const TableField = ({ field, indexList, dispatch }) => {
           <tr key={`${field.name}-row-${rowIndex}`}>
             <th scope="row">{row}</th>
             {field.columns.map((column, colIndex) => {
-              const fieldName = combineTableFieldName(field.dynamicTable, row, column);
+              const fieldName = combineTableFieldName(
+                field.dynamicTable,
+                row,
+                column,
+              );
               return (
                 <td key={`${fieldName}-${rowIndex}-${colIndex}`}>
                   <Input
@@ -276,8 +295,14 @@ const TableField = ({ field, indexList, dispatch }) => {
         ))}
         {field.dynamicTable && (
           <tr>
-            <td colSpan={field.columns.length + 1} style={{ textAlign: "center" }}>
-              <Button onClick={() => handleAdd()} style={{ background: "#00563A" }}>
+            <td
+              colSpan={field.columns.length + 1}
+              style={{ textAlign: "center" }}
+            >
+              <Button
+                onClick={() => handleAdd()}
+                style={{ background: "#00563A" }}
+              >
                 Add
               </Button>
             </td>
@@ -361,7 +386,10 @@ const FormSection = ({
           <div onClick={() => setIsOpen(!isOpen)} style={{ cursor: "pointer" }}>
             {isOpen ? <MdExpandLess /> : <MdExpandMore />}
           </div>
-          <CardTitle id="card-title" style={{ flexGrow: "1", textAlign: "center" }}>
+          <CardTitle
+            id="card-title"
+            style={{ flexGrow: "1", textAlign: "center" }}
+          >
             <b>{section.heading}</b>
           </CardTitle>
         </div>
@@ -478,9 +506,15 @@ const FormParser = ({
   const [cardsExpand, setCardsExpand] = useState(true);
   const [showAllFields, setShowAllFields] = useState(!formState.hasShortForm);
   const [collapseToolbar, setCollapseToolbar] = useState(false);
-  const { currentUser } = useAuth();
-  const navigate = useRouter();
-  const collectionRef = collection(db, "incidents", String(params.incidentId), "forms");
+  const { user } = useUser();
+  const currentUser = user;
+  const uid = user?.id ?? null;   const navigate = useRouter();
+  const collectionRef = collection(
+    db,
+    "incidents",
+    String(params.incidentId),
+    "forms",
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const loadAndPrepopulateForm = () => {
@@ -521,7 +555,7 @@ const FormParser = ({
         console.log(data);
         await addDoc(collectionRef, data);
       }
-      navigate.push(`/incidents/${params.incidentId}`);
+      navigate.push(`/private/incidents/${params.incidentId}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -618,7 +652,9 @@ const FormParser = ({
           }}
         >
           <Button
-            onClick={() => navigate.push(`/incidents/${params.incidentId}`)}
+            onClick={() =>
+              navigate.push(`/private/incidents/${params.incidentId}`)
+            }
             style={{ marginBottom: "5px" }}
           >
             Return to Incident
@@ -649,7 +685,9 @@ const FormParser = ({
                 onClick={() => setShowAllFields(!showAllFields)}
                 style={{ background: "#00563A", marginLeft: "8px" }}
               >
-                {showAllFields ? "Hide Additional Data Fields" : "Show All Data Fields"}
+                {showAllFields
+                  ? "Hide Additional Data Fields"
+                  : "Show All Data Fields"}
               </Button>
             )}
           </div>

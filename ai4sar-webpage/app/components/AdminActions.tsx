@@ -8,7 +8,7 @@ export default function AdminActions({ incident }: any) {
   async function publish() {
     setLoading(true);
     try {
-      await fetch(`/api/incidents/${incident._id || incident.id}`, {
+      await fetch(`/api/private/incidents/${incident._id || incident.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ published: true }),

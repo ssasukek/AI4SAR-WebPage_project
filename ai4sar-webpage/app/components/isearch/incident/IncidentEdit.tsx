@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useReducer } from "react";
 import { collection, addDoc, doc, setDoc, getDoc } from "firebase/firestore";
-import { db } from "../../Firebase-config";
+import { db } from "@/lib/firebase";
 import {
   Button,
   Card,
@@ -13,7 +13,6 @@ import {
   CardTitle,
 } from "reactstrap";
 import { useRouter, useParams } from "next/navigation";
-import { useAuth } from "../../contexts/AuthContext";
 import creationJSON from "../forms/json/incidentCreation.json";
 import { MdEmojiObjects, MdExpandLess, MdExpandMore } from "react-icons/md";
 import Submission from "../forms/Submission";
@@ -28,6 +27,7 @@ import {
   FormSectionProps,
   IncidentObject,
 } from "./IncidentCreation";
+import { useUser } from "@clerk/nextjs";
 
 const generateInitialForm = (creationJSON: CreationJSON): IncidentObject =>
   creationJSON.sections
@@ -179,8 +179,9 @@ const IncidentEdit: React.FC<{ initialIncidentState?: GenericForm }> = ({
   const [cardsExpand, setCardsExpand] = useState(true);
   const [submit, setSubmit] = useState(false);
   const [collapseToolbar, setCollapseToolbar] = useState(false);
-  const { currentUser } = useAuth();
-
+  const { user } = useUser();
+  const currentUser = user;
+  const uid = user?.id ?? null;
   useEffect(() => {
     if (params.incidentId) {
       fetchInitialIncidentData(params.incidentId as string, dispatch);
@@ -200,7 +201,7 @@ const IncidentEdit: React.FC<{ initialIncidentState?: GenericForm }> = ({
     const data = fillForm(formState, submit, currentUser);
     data.viewableBy = viewableByArray;
     await setDoc(doc(db, "incidents", params.incidentId as string), data);
-    navigate.push("/incidents");
+    navigate.push("/private/incidents");
   };
 
   return (
@@ -280,7 +281,7 @@ const IncidentEdit: React.FC<{ initialIncidentState?: GenericForm }> = ({
             }}
           >
             <Button
-              onClick={() => navigate.push("/incidents")}
+              onClick={() => navigate.push("/private/incidents")}
               style={{ marginBottom: "5px" }}
             >
               Return to iSearch

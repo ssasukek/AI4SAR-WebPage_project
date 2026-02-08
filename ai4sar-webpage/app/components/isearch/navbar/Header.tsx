@@ -12,18 +12,9 @@ import {
   Button,
   Tooltip
 } from "reactstrap";
-import { useAuth } from "../../contexts/AuthContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { signOut, currentUser } = useAuth();
-  const navigate = useRouter();
-
-  const handleSignOut = () => {
-    signOut();
-    setIsOpen(false); // Close the navbar when signing out
-    navigate.push("/");
-  };
 
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const toggle = () => setTooltipOpen(!tooltipOpen);
@@ -38,7 +29,7 @@ const Header = () => {
         fixed="top"
         light
       >
-        <NavbarBrand style={{ color: "white" }} href="/incidents">
+        <NavbarBrand style={{ color: "white" }} href="/private/incidents">
           IntelliSAR
         </NavbarBrand>
         <NavbarBrand style={{ color: "white" }}>
@@ -49,12 +40,8 @@ const Header = () => {
               textDecoration: "underline",
             }}
           >
-            {currentUser && currentUser.displayName ? currentUser.displayName : "User"}
           </span>
         </NavbarBrand>
-        <Tooltip isOpen={tooltipOpen} target="Tooltip" toggle={toggle}>
-          {currentUser && currentUser.email ? currentUser.email : "Signed Out"}
-        </Tooltip>
         <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
         <Collapse navbar isOpen={isOpen}>
           <Nav className="me-auto" navbar>
@@ -63,7 +50,6 @@ const Header = () => {
                 GitHub
               </NavLink>
             </NavItem>
-            {currentUser && <Button onClick={() => handleSignOut()}>Sign Out</Button>}
           </Nav>
         </Collapse>
       </Navbar>

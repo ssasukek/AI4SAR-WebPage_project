@@ -7,7 +7,7 @@ import {
   where,
   QueryDocumentSnapshot,
 } from "firebase/firestore";
-import { db } from "../../Firebase-config";
+import { db } from "@/lib/firebase";
 import { useQuery } from "@tanstack/react-query";
 
 export interface Clue {

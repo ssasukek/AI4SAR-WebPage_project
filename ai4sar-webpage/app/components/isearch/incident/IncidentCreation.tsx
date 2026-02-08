@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, useReducer } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../Firebase-config";
+import { db } from "@/lib/firebase";
 import {
   Button,
   Card,
@@ -13,13 +13,13 @@ import {
   CardTitle,
 } from "reactstrap";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../../contexts/AuthContext";
 import creationJSON from "../forms/json/incidentCreation.json";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import Submission from "../forms/Submission";
 import incidentReducer, { IncidentReducerAction } from "../reducers/IncidentReducer";
 import fillForm from "../utils/FillForm";
 import { GenericForm, FormField, type FormSection } from "../forms/Form";
+import { useUser } from "@clerk/nextjs";
 
 export interface CreationJSON {
   sections: FormSection[];
@@ -250,7 +250,9 @@ const IncidentCreation: React.FC = () => {
   const [submit, setSubmit] = useState(false);
   const [collapseToolbar, setCollapseToolbar] = useState(false);
   const collectionRef = collection(db, "incidents");
-  const { currentUser } = useAuth();
+  const { user } = useUser();
+  const currentUser = user;
+  const uid = user?.id ?? null;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -265,7 +267,7 @@ const IncidentCreation: React.FC = () => {
     data.viewableBy = viewableByArray;
 
     await addDoc(collectionRef, data);
-    navigate.push("/incidents");
+    navigate.push("/private/incidents");
   };
 
   return (
@@ -345,7 +347,7 @@ const IncidentCreation: React.FC = () => {
             }}
           >
             <Button
-              onClick={() => navigate.push("/incidents")}
+              onClick={() => navigate.push("/private/incidents")}
               style={{ marginBottom: "5px" }}
             >
               Return to iSearch

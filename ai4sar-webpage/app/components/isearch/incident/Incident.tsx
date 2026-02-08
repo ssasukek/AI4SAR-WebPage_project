@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { db } from "../../Firebase-config";
+import { db } from "@/lib/firebase";
 import {
   collection,
   getDocs,
@@ -12,7 +12,6 @@ import {
   QuerySnapshot,
   DocumentData,
 } from "firebase/firestore";
-import { useAuth } from "../../contexts/AuthContext";
 import {
   Button,
   Card,
@@ -26,7 +25,7 @@ import {
   Placeholder,
   Tooltip,
 } from "reactstrap";
-import { MapProvider } from "./../../providers/map-provider";
+import { MapProvider } from "@/app/providers/map-provider";
 import CluesPane from "./incidentPanes/clues/CluesPane";
 import ResourcesPane from "./incidentPanes/ResourcesPane";
 import TimelinePane from "./incidentPanes/timeline/TimelinePane";
@@ -34,6 +33,7 @@ import WeatherBox from "./WeatherBox";
 import MissingPersonsPane from "./incidentPanes/MissingPersonsPane";
 import { PredictionPane } from "./incidentPanes/model/PredictionPane";
 import { MapComponent } from "./map";
+import { useUser } from "@clerk/nextjs";
 
 interface FormCardData {
   key: string;
@@ -55,11 +55,14 @@ interface IncidentData {
   [key: string]: any;
 }
 
+type CurrentUser = { uid: string; displayName: string };
+
 interface FormsProps {
   navState: number;
   incidentId: string;
-  currentUser: { uid: string; displayName: string };
+  currentUser: CurrentUser;
 }
+
 
 interface DashboardProps {
   incident: IncidentData;
@@ -73,12 +76,15 @@ const FormCard: React.FC<{ form: Form }> = ({ form }) => {
   const params = useParams();
 
   const handleClick = () => {
-    navigate.push(`/incidents/${params.incidentId}/${form.id}`);
+    navigate.push(`/private/incidents/${params.incidentId}/${form.id}`);
   };
 
   return (
     // {form.data.author.map((author) => (author + ", "))}
-    <div onClick={() => handleClick()} style={{ cursor: "pointer", padding: "1rem" }}>
+    <div
+      onClick={() => handleClick()}
+      style={{ cursor: "pointer", padding: "1rem" }}
+    >
       <Card>
         <CardBody id="operation-card">
           <div
@@ -132,7 +138,9 @@ const FormCard: React.FC<{ form: Form }> = ({ form }) => {
                         textDecoration: "underline",
                       }}
                     >
-                      {form.data.author[0] + " + " + (form.data.author.length - 1)}
+                      {form.data.author[0] +
+                        " + " +
+                        (form.data.author.length - 1)}
                     </span>
                     <Tooltip
                       placement="right"
@@ -337,7 +345,9 @@ const Dashboard: React.FC<DashboardProps> = ({ incident }) => {
         }}
       >
         {/*Missing Person Info box */}
-        <div style={{ background: "#ccc", padding: "1rem", minHeight: "200px" }}>
+        <div
+          style={{ background: "#ccc", padding: "1rem", minHeight: "200px" }}
+        >
           <MissingPersonsPane incident={incident} />
           <div style={{ textAlign: "left" }}></div>
         </div>
@@ -415,12 +425,24 @@ const Dashboard: React.FC<DashboardProps> = ({ incident }) => {
 };
 
 const Incident: React.FC = () => {
-  const { currentUser } = useAuth();
   const [incident, setIncident] = useState<IncidentData>([]);
   const [navState, setNavState] = useState(0);
   const params = useParams();
   console.log("Incident ID:", params.incidentId);
   const navigate = useRouter();
+
+  const { user } = useUser();
+  if (!user) return null;
+
+  const currentUser: CurrentUser = {
+    uid: user.id,
+    displayName:
+      user.fullName ??
+      user.username ??
+      user.primaryEmailAddress?.emailAddress ??
+      "Unknown",
+  };
+
 
   // Sets up real-time listener to the Firestore document
   useEffect(() => {
@@ -486,7 +508,9 @@ const Incident: React.FC = () => {
             <p id="header">AI Insight</p>
           </div>
           <Button
-            onClick={() => navigate.push(`/incidents/${params.incidentId}/edit`)}
+            onClick={() =>
+              navigate.push(`/private/incidents/${params.incidentId}/edit`)
+            }
             style={{
               display: "flex",
               marginTop: "2px",
@@ -498,7 +522,11 @@ const Incident: React.FC = () => {
             {" "}
             Edit Incident Information{" "}
           </Button>
-          <Button onClick={() => navigate.push(`/incidents/${params.incidentId}/searcher`)}>
+          <Button
+            onClick={() =>
+              navigate.push(`/private/incidents/${params.incidentId}/searcher`)
+            }
+          >
             Create Searcher Profile
           </Button>
         </div>

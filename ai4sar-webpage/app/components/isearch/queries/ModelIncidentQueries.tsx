@@ -1,5 +1,5 @@
 import { collection, getDocs, query, where, QuerySnapshot, DocumentData } from "firebase/firestore";
-import { db } from "../../Firebase-config";
+import { db } from "@/lib/firebase";
 import { useQuery } from "@tanstack/react-query";
 import { FormSection, FormField } from "../forms/Form";
 
@@ -281,6 +281,6 @@ export const useTotalManHoursModelInput = (incidentId: string) => {
 
 // Returns a query object for all needed inputs for the Resource Allocation and Geospatial prediction models
 // queries for the following inputs: incident start time, number of rangers, activity, subject age, and subject gender
-export const useReAlGeModelInput = (incidentId) => {
-  // ... to be implemented
-};
+// export const useReAlGeModelInput = (incidentId) => {
+//   // ... to be implemented
+// };

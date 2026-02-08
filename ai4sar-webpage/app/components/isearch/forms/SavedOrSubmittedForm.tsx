@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getDoc, doc } from "firebase/firestore";
-import { db } from "../../Firebase-config";
+import { db } from "@/lib/firebase";
 import Form from "./Form";
 import { GenericForm } from "./Form";
 
