@@ -1,0 +1,110 @@
+{
+  "key": "ics211a",
+  "title": "Agency Check In List (ICS 211A)",
+  "sections": [
+    {
+      "heading": "Incident Info",
+      "fields": [
+        {
+          "label": "Incident Name",
+          "name": "incidentName",
+          "type": "text",
+          "placeholder": "Incident Name"
+        },
+        {
+          "label": "Incident Date",
+          "name": "incidentDate",
+          "type": "date",
+          "placeholder": "incidentDate"
+        },
+        {
+          "label": "Incident Number",
+          "name": "incidentNumber",
+          "type": "number",
+          "placeholder": "Incident Number"
+        },
+        {
+          "label": "Operational Period",
+          "name": "operationalPeriod",
+          "type": "text",
+          "placeholder": "Operational Period"
+        },
+        {
+          "label": "Check In Location",
+          "name": "checkInLocation",
+          "type": "textarea",
+          "placeholder": "Check In Location"
+        }
+      ]
+    },
+    {
+      "heading": "Agency Info",
+      "fields": [
+        {
+          "label": "Agency/Team",
+          "name": "agencyTeam",
+          "type": "text",
+          "placeholder": "Agency/Name"
+        },
+        {
+          "label": "Liason Name",
+          "name": "liasonName",
+          "type": "text",
+          "placeholder": "Liason Name"
+        },
+        {
+          "label": "Agency Address",
+          "name": "agencyAddress",
+          "type": "text",
+          "placeholder": "Agency Address"
+        },
+        {
+          "label": "Agency Phone Number",
+          "name": "agencyPhoneNumber",
+          "type": "text",
+          "placeholder": "Agency Phone Number"
+        }
+      ]
+    },
+    {
+      "heading": "Resource Info",
+      "fields": [
+        {
+          "dynamicTable": true,
+          "table": true,
+          "columns": [ 
+            {"name": "When Made", "type": "text"},
+            {"name": "Name (Personnel) - OR - Description (Equipment)", "type": "text"},
+            {"name": "Date In", "type": "date"},
+            {"name": "Time In", "type": "time"},
+            {"name": "Date Out", "type": "date"},
+            {"name": "Time Out", "type": "time"},
+            {"name": "Additional Info", "type": "text"}
+          ],
+          "rows": ["1"]
+        }
+      ]
+    },
+    {
+      "heading": "Preparation Info",
+      "fields": [
+        {
+          "label": "Prepared By",
+          "name": "preparedBy",
+          "type": "text",
+          "placeholder": "Prepared By"
+        },
+        {
+          "label": "Date Prepared",
+          "name": "datePrepared",
+          "type": "date"
+        },
+        {
+          "label": "Time Prepared",
+          "name": "timePrepared",
+          "type": "time"
+        }
+      ]
+    }
+  ]
+}

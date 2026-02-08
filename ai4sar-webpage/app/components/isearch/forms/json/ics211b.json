@@ -1,0 +1,104 @@
+{
+  "key": "ics211b",
+  "title": "Check In List (ICS 211B)",
+  "sections": [
+    {
+      "heading": "Incident Info",
+      "fields": [
+        {
+          "label": "Incident Name",
+          "name": "incidentName",
+          "type": "text",
+          "placeholder": "Incident Name"
+        },
+        {
+          "label": "Incident Date",
+          "name": "incidentDate",
+          "type": "date",
+          "placeholder": "incidentDate"
+        },
+        {
+          "label": "Incident Number",
+          "name": "incidentNumber",
+          "type": "number",
+          "placeholder": "Incident Number"
+        },
+        {
+          "label": "Operational Period",
+          "name": "operationalPeriod",
+          "type": "text",
+          "placeholder": "Operational Period"
+        },
+        {
+          "label": "Check In Location",
+          "name": "checkInLocation",
+          "type": "textarea",
+          "placeholder": "Check In Location"
+        }
+      ]
+    },
+    {
+      "heading": "Incident Check In",
+      "fields": [
+        {
+          "dynamicTable": true,
+          "table": true,
+          "columns": [
+            {
+              "name": "When Made",
+              "type": "text"
+            },
+            {
+              "name": "Name (Personnel) or Description (Equipment)",
+              "type": "text"
+            },
+            {
+              "name": "Agency/Team",
+              "type": "text"
+            },
+            {
+              "name": "Time In",
+              "type": "time"
+            },
+            {
+              "name": "Time Out",
+              "type": "time"
+            },
+            {
+              "name": "Hours",
+              "type": "number"
+            },
+            {
+              "name": "Additional Information",
+              "type": "text"
+            }
+          ],
+          "rows": [
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Preparation Info",
+      "fields": [
+        {
+          "label": "Prepared By (Resource Unit)",
+          "name": "preparedBy",
+          "type": "text",
+          "placeholder": "Prepared By"
+        },
+        {
+          "label": "Date Prepared",
+          "name": "datePrepared",
+          "type": "date"
+        },
+        {
+          "label": "Time Prepared",
+          "name": "timePrepared",
+          "type": "time"
+        }
+      ]
+    }
+  ]
+}

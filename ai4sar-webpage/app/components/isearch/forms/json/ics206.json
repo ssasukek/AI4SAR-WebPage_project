@@ -1,0 +1,219 @@
+{
+  "key": "ics206",
+  "title": "Medical Plan (ICS 206)",
+  "sections": [
+    {
+      "heading": "Incident Info",
+      "fields": [
+        {
+          "label": "Incident Name",
+          "name": "incidentName",
+          "type": "text",
+          "placeholder": "Incident Name"
+        },
+        {
+          "label": "Incident Date",
+          "name": "incidentDate",
+          "type": "date",
+          "placeholder": "incidentDate"
+        },
+        {
+          "label": "Incident Number",
+          "name": "incidentNumber",
+          "type": "number",
+          "placeholder": "Incident Number"
+        },
+        {
+          "label": "Operational Period",
+          "name": "operationalPeriod",
+          "type": "text",
+          "placeholder": "Operational Period"
+        }
+      ]
+    },
+    {
+      "heading": "Incident Medical Resources (Resuce, Medical, Transport, Aid Stations)",
+      "fields": [
+        {
+          "dynamicTable": true,
+          "table": true,
+          "columns": [
+            {
+              "name": "Name / Type",
+              "type": "text"
+            },
+            {
+              "name": "Location",
+              "type": "text"
+            },
+            {
+              "name": "Paramedics",
+              "type": "text",
+              "placeholder": "Yes / No"
+            }
+          ],
+          "rows": [
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Nearby Fire, EMS, and Ambulance Services",
+      "fields": [
+        {
+          "dynamicTable": true,
+          "table": true,
+          "columns": [
+            {
+              "name": "Name",
+              "type": "text"
+            },
+            {
+              "name": "Address",
+              "type": "text"
+            },
+            {
+              "name": "Phone",
+              "type": "text"
+            },
+            {
+              "name": "Paramedics",
+              "type": "text",
+              "placeholder": "Yes / No"
+            }
+          ],
+          "rows": [
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Aeromedical Evacuation",
+      "fields": [
+        {
+          "label": "Name",
+          "name": "nameAeromedical",
+          "type": "text",
+          "placeholder": "Name"
+        },
+        {
+          "label": "Location",
+          "name": "locationAeromedical",
+          "type": "text",
+          "placeholder": "Location"
+        },
+        {
+          "label": "LZ Frequency",
+          "name": "lzFrequency",
+          "type": "text"
+        },
+        {
+          "subsection": true,
+          "heading": "Landing Zones",
+          "fields": [
+            {
+              "dynamicTable": true,
+              "table": true,
+              "columns": [
+                {
+                  "name": "Designator",
+                  "type": "text"
+                },
+                {
+                  "name": "Location",
+                  "type": "text"
+                },
+                {
+                  "name": "Lat / Lon Coordinates",
+                  "type": "text"
+                }
+              ],
+              "rows": [
+                "1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Hospitals",
+      "fields": [
+        {
+          "dynamicTable": true,
+          "table": true,
+          "columns": [
+            {
+              "name": "Name",
+              "type": "text"
+            },
+            {
+              "name": "Address",
+              "type": "text"
+            },
+            {
+              "name": "Travel Time",
+              "type": "time"
+            },
+            {
+              "name": "Phone",
+              "type": "text"
+            },
+            {
+              "name": "Helicopter Pad",
+              "type": "text",
+              "placeholder": "Yes / No"
+            },
+            {
+              "name": "Trauma Center",
+              "type": "text",
+              "placeholder": "Yes / No"
+            }
+          ],
+          "rows": [
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Medical Emergency Procedures",
+      "fields": [
+        {
+          "label": "Medical Emergency Procedures",
+          "name": "medicalEmergencyProcedures",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "heading": "Preparation Info",
+      "fields": [
+        {
+          "label": "Prepared By (Medical Unit Leader)",
+          "name": "preparedBy",
+          "type": "text",
+          "placeholder": "Prepared By"
+        },
+        {
+          "label": "Reviewed By (Safety Officer)",
+          "name": "reviewedBy",
+          "type": "text",
+          "placeholder": "Reviewed By"
+        },
+        {
+          "label": "Date Prepared",
+          "name": "datePrepared",
+          "type": "date"
+        },
+        {
+          "label": "Time Prepared",
+          "name": "timePrepared",
+          "type": "time"
+        }
+      ]
+    }
+  ]
+}

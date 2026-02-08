@@ -1,0 +1,162 @@
+{
+  "sections": [
+    {
+      "heading": "Incident",
+      "fields": [
+        {
+          "required": true,
+          "name": "incidentName",
+          "label": "Incident name"
+        },
+        {
+          "required": false,
+          "name": "viewableBy",
+          "label": "Add Others to Incident by Email",
+          "placeholder": "Enter emails separated by commas",
+          "dynamic": true,
+          "type": "text"
+        },
+        {
+          "required": true,
+          "name": "incidentNumber",
+          "label": "Incident number",
+          "type": "number"
+        },
+        {
+          "required": true,
+          "name": "incidentDate",
+          "label": "Incident Date",
+          "type": "date"
+        },
+        {
+          "name": "oesIncidentNumber",
+          "label": "OES Incident number"
+        },
+        {
+          "required": true,
+          "name": "sheriffName",
+          "label": "Sheriff's office contact name"
+        },
+        {
+          "name": "sheriffPhoneNumber",
+          "label": "Sheriff's office phone number"
+        },
+        {
+          "name": "commandPostTelephone",
+          "label": "Command post telephone number"
+        },
+        {
+          "required": true,
+          "name": "initialRadioChannel",
+          "label": "Initial radio channel"
+        },
+        {
+          "required": true,
+          "name": "commandPostLocation",
+          "label": "Command post location"
+        },
+        {
+          "name": "commandPostLatitude",
+          "label": "Command post latitude (must be between -90 and 90)",
+          "type": "number",
+          "min": -90,
+          "max": 90
+        },
+        {
+          "name": "commandPostLongitude",
+          "label": "Command post longitude (must be between -180 and 180)",
+          "type": "number",
+          "min": -180,
+          "max": 180
+        }
+      ]
+    },
+    {
+      "heading": "Preliminary Incident Missing Person Information",
+      "fields": [
+        {
+          "required": true,
+          "name": "missingPersonName",
+          "label": "Name"
+        },
+        {
+          "name": "missingPersonAge",
+          "label": "Age"
+        },
+        {
+          "name": "missingPersonSex",
+          "label": "Sex"
+        },
+        {
+          "name": "missingPersonPls",
+          "label": "Point last seen"
+        },
+        {
+          "name": "missingPersonPlsLatitude",
+          "label": "Point last seen latitude (must be between -90 and 90)",
+          "type": "coordinate",
+          "min": -90,
+          "max": 90
+        },
+        {
+          "name": "missingPersonPlsLongitude",
+          "label": "Point last seen longitude (must be between -180 and 180)",
+          "type": "coordinate",
+          "min": -180,
+          "max": 180
+        },
+        {
+          "name": "missingPersonAlert",
+          "label": "Missing Person Alert",
+          "placeholder": "i.e. Facebook link, text alert, alert issued to law enforcement, etc."
+        }
+      ]
+    },
+    {
+      "heading": "Reporting Person Information",
+      "fields": [
+        {
+          "name": "reportingPersonName",
+          "label": "Name"
+        },
+        {
+          "name": "reportingPersonPhone",
+          "label": "Phone number"
+        },
+        {
+          "name": "reportingPersonAddress",
+          "label": "Address"
+        }
+      ]
+    },
+    {
+      "heading": "Incident Creator Information",
+      "fields": [
+        {
+          "required": true,
+          "label": "Prepared By",
+          "name": "incidentPreparedBy",
+          "type": "text",
+          "placeholder": "Prepared By"
+        },
+        {
+          "required": true,
+          "label": "Date Prepared",
+          "name": "incidentDatePrepared",
+          "type": "date"
+        },
+        {
+          "required": true,
+          "label": "Time Prepared",
+          "name": "incidentTimePrepared",
+          "type": "time"
+        },
+        {
+          "required": true,
+          "name": "incidentPreparedData",
+          "label": "Prepared data"
+        }
+      ]
+    }
+  ]
+}

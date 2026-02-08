@@ -1,0 +1,121 @@
+{
+  "key": "ics214",
+  "title": "Unit Log (ICS 214)",
+  "sections": [
+    {
+      "heading": "Incident Info",
+      "fields": [
+        {
+          "label": "Incident Name",
+          "name": "incidentName",
+          "type": "text",
+          "placeholder": "Incident Name"
+        },
+        {
+          "label": "Incident Date",
+          "name": "incidentDate",
+          "type": "date",
+          "placeholder": "incidentDate"
+        },
+        {
+          "label": "Incident Number",
+          "name": "incidentNumber",
+          "type": "number",
+          "placeholder": "Incident Number"
+        },
+        {
+          "label": "Operational Period",
+          "name": "operationalPeriod",
+          "type": "text",
+          "placeholder": "Operational Period"
+        }
+      ]
+    },
+    {
+      "heading": "Unit Info",
+      "fields": [
+        {
+          "label": "Unit Name/Designator",
+          "name": "unitNameOrDesignators",
+          "type": "text",
+          "placeholder": "Unit Name/Designator"
+        },
+        {
+          "label": "Unit Leader (Name and Position)",
+          "name": "unitLeader",
+          "type": "text",
+          "placeholder": "Unit Leader (Name and Position)"
+        }
+      ]
+    },
+    {
+      "heading": "Personnel Roster Assigned",
+      "fields": [
+        {
+          "dynamicTable": true,
+          "table": true,
+          "columns": [
+            {
+              "name": "Name",
+              "type": "text"
+            },
+            {
+              "name": "ICS Position",
+              "type": "text"
+            },
+            {
+              "name": "Team/Agency",
+              "type": "text"
+            }
+          ],
+          "rows": [
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Activity Log",
+      "fields": [
+        {
+          "dynamicTable": true,
+          "table": true,
+          "columns": [
+            {
+              "name": "Time",
+              "type": "time"
+            },
+            {
+              "name": "Major Events",
+              "type": "text"
+            }
+          ],
+          "rows": [
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Preparation Info",
+      "fields": [
+        {
+          "label": "Prepared By",
+          "name": "preparedBy",
+          "type": "text",
+          "placeholder": "Prepared By"
+        },
+        {
+          "label": "Date Prepared",
+          "name": "datePrepared",
+          "type": "date"
+        },
+        {
+          "label": "Time Prepared",
+          "name": "timePrepared",
+          "type": "time"
+        }
+      ]
+    }
+  ]
+}

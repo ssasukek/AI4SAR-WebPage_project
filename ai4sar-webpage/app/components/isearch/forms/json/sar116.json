@@ -1,0 +1,122 @@
+{
+  "key": "sar116",
+  "title": "Team Briefing - Hasty Search Supplement (SAR 116)",
+  "sections": [
+    {
+      "heading": "Incident Info",
+      "fields": [
+        {
+          "label": "Incident Name",
+          "name": "incidentName",
+          "type": "text",
+          "placeholder": "Incident Name"
+        },
+        {
+          "label": "Incident Date",
+          "name": "incidentDate",
+          "type": "date",
+          "placeholder": "incidentDate"
+        },
+        {
+          "label": "Incident Number",
+          "name": "incidentNumber",
+          "type": "number",
+          "placeholder": "Incident Number"
+        },
+        {
+          "label": "Operational Period",
+          "name": "operationalPeriod",
+          "type": "text",
+          "placeholder": "Operational Period"
+        }
+      ]
+    },
+    {
+      "heading": "Assignment Number",
+      "fields": [
+        {
+          "label": "Assignment Number",
+          "name": "assignmentNumber",
+          "type": "number",
+          "placeholder": "Assignment Number"
+        }
+      ]
+    },
+    {
+      "heading": "What You Did",
+      "fields": [
+        {
+          "label": "Describe your Efforts to Attract a Responsive Subject",
+          "name": "describeSearchEfforts",
+          "type": "textarea"
+        },
+        {
+          "label": "Did you Locate Features that Would Likely Contain the Subject",
+          "name": "didYouLocateFeatureThatWouldContaineSubject",
+          "type": "textarea"
+        },
+        {
+          "label": "Describe any Hazards or Attractions you Found",
+          "name": "describeHazardsOrAttraction",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "heading": "Observations",
+      "fields": [
+        {
+          "label": "Visibility During Search (Day, Dusk, Night, Other)",
+          "name": "visibilityDuringSearch",
+          "type": "textarea"
+        },
+        {
+          "label": "Describe Ability to Hear a Response (Background Noise)",
+          "name": "describeAbilityToHear",
+          "type": "textarea"
+        },
+        {
+          "label": "Describe the Trail Conditions",
+          "name": "describeTrailCondition",
+          "type": "textarea"
+        },
+        {
+          "label": "Describe the Off-Trail Conditions",
+          "name": "describeOffTrailCondition",
+          "type": "textarea"
+        },
+        {
+          "label": "Does the Map Accurately Reflect the Trails",
+          "name": "doesMapReflectTrails",
+          "type": "textarea"
+        },
+        {
+          "label": "How are the Tracking Conditions",
+          "name": "howAreTrackingCondition",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "heading": "Debrief Info ",
+      "fields": [
+        { 
+          "label": "Debriefer",
+          "name": "debriefer",
+          "type": "text",
+          "placeholder": "Debriefer"
+        },
+        {
+          "label": "Date Prepared",
+          "name": "datePrepared",
+          "type": "date"
+        },
+        {
+          "label": "Time Prepared",
+          "name": "timePrepared",
+          "type": "time"
+        }
+      ]
+    }
+  ]
+}

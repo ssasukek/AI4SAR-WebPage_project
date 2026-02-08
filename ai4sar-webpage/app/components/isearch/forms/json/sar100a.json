@@ -1,0 +1,136 @@
+{
+  "key": "sar100a",
+  "title": "General Briefing - Missing Person (SAR 100A)",
+  "sections": [
+    {
+      "heading": "Incident Info",
+      "fields": [
+        {
+          "label": "Incident Name",
+          "name": "incidentName",
+          "type": "text",
+          "placeholder": "Incident Name"
+        },
+        {
+          "label": "Incident Date",
+          "name": "incidentDate",
+          "type": "date",
+          "placeholder": "incidentDate"
+        },
+        {
+          "label": "Incident Number",
+          "name": "incidentNumber",
+          "type": "number",
+          "placeholder": "Incident Number"
+        },
+        {
+          "label": "Operational Period",
+          "name": "operationalPeriod",
+          "type": "text",
+          "placeholder": "Operational Period"
+        },
+        {
+          "label": "Incident Summary",
+          "name": "incidentSummary",
+          "type": "textarea",
+          "placeholder": "Incident Summary"
+        }
+      ]
+    },
+    {
+      "heading": "Communications Plan",
+      "fields": [
+        {
+          "table": true,
+          "columns": [
+            {
+              "name": "Frequency",
+              "type": "text"
+            },
+            {
+              "name": "Channel Description",
+              "type": "text"
+            },
+            {
+              "name": "Channel",
+              "type": "text"
+            }
+          ],
+          "rows": ["Command (TEAM--BASE)", "Tactical (TEAM--TEAM)"]
+        }
+      ]
+    },
+    {
+      "heading": "Subject Info",
+      "fields": [
+        { "label": "Subject Name", "name": "subjectName", "type": "text" },
+        { "label": "Sex", "name": "subjectSex", "type": "text" },
+        { "label": "Age", "name": "subjectAge", "type": "text" },
+        {
+          "label": "Name to Call",
+          "name": "subjectNameToCall",
+          "type": "text"
+        },
+        {
+          "label": "Expected Response",
+          "name": "expectedResponse",
+          "type": "text"
+        },
+        {
+          "label": "Subject's Plan Or Intent",
+          "name": "subjectsPlan",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "heading": "Physical Description",
+      "fields": [
+        { "label": "Height", "name": "height", "type": "text" },
+        { "label": "Weight", "name": "weight", "type": "text" },
+        { "label": "Build", "name": "build", "type": "text" },
+        { "label": "Race", "name": "race", "type": "text" },
+        { "label": "Complexion", "name": "complexion", "type": "text" },
+        { "label": "Eyes", "name": "eyes", "type": "text" },
+        { "label": "Hair", "name": "hair", "type": "text" },
+        {
+          "label": "Other Description",
+          "name": "otherDescription",
+          "type": "textarea"
+        },
+        {
+          "label": "Clothing Description",
+          "name": "clothingDescription",
+          "type": "textarea"
+        },
+        {
+          "label": "Footware/Track Description",
+          "name": "footware",
+          "type": "textarea"
+        },
+        { "label": "Upload Photo", "name": "photo", "type": "file" }
+      ]
+    },
+    {
+      "heading": "Preparation Info",
+      "fields": [
+        {
+          "label": "Prepared By",
+          "name": "preparedBy",
+          "type": "text",
+          "placeholder": "Prepared By"
+        },
+        {
+          "label": "Date Prepared",
+          "name": "datePrepared",
+          "type": "date"
+        },
+        {
+          "label": "Time Prepared",
+          "name": "timePrepared",
+          "type": "time"
+        }
+      ]
+    }
+  ]
+}

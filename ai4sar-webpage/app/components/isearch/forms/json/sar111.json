@@ -1,0 +1,168 @@
+{
+  "key": "sar111",
+  "title": "Team Debriefing - Dog Supplement (SAR 111)",
+  "sections": [
+    {
+      "heading": "Incident Info",
+      "fields": [
+        {
+          "label": "Incident Name",
+          "name": "incidentName",
+          "type": "text",
+          "placeholder": "Incident Name"
+        },
+        {
+          "label": "Incident Date",
+          "name": "incidentDate",
+          "type": "date",
+          "placeholder": "incidentDate"
+        },
+        {
+          "label": "Incident Number",
+          "name": "incidentNumber",
+          "type": "number",
+          "placeholder": "Incident Number"
+        },
+        {
+          "label": "Operational Period",
+          "name": "operationalPeriod",
+          "type": "text",
+          "placeholder": "Operational Period"
+        }
+      ]
+    },
+    {
+      "heading": "Assignment Number",
+      "fields": [
+        {
+          "label": "Assignment Number",
+          "name": "assignmentNumber",
+          "type": "number",
+          "placeholder": "Assignment Number"
+        }
+      ]
+    },
+    { "heading": "Scent Conditions", 
+      "fields": [
+        {
+          "dynamicTable": true,
+          "table": true,
+          "columns": [ 
+            {"name": "Time Of Observation", "type": "time"},
+            {"name": "Wind from", "type": "text"},
+            {"name": "Wind Speed", "type": "text"},
+            {"name": "Six Feet Shadow", "type": "text"},
+            {"name": "Cloud Cover", "type": "text"},
+            {"name": "Moisture", "type": "text"},
+            {"name": "Temp", "type": "text"},
+            {"name": "Other Factors", "type": "text"},
+            {"name": "Summary of Conditions", "type": "text"}
+          ],
+          "rows": ["1"]
+        }
+      ] 
+    },
+    { 
+      "heading": "Area Search Dogs", 
+      "fields": [
+        {
+          "subsection": true,
+          "heading": "Search Techniques",
+          "fields": [
+            {
+              "table": true,
+              "columns": [
+                {
+                  "name": " ",
+                  "type": "checkbox"
+                }
+              ],
+              "rows": ["Routes of Travel", "Grid Pattern", "Other"]
+            },
+            {
+              "label": "Describe if Other",
+              "name": "describeIfOther",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "label": "Sweep Spacing",
+          "name": "sweepSpacing",
+          "type": "text"
+        },
+        {
+          "label": "POD",
+          "name": "pod",
+          "type": "text"
+        },
+        {
+          "label": "Areas where dog showed interest",
+          "name": "areasWhereDogShowedInterest",
+          "type": "text"
+        },
+        {
+          "label": "Should Portions of the Area be Researched During Better Scent Conditions?",
+          "name": "shouldPortionsOfArea",
+          "type": "text"
+        }
+      ] 
+    },
+    {
+      "heading": "Search Specific Dogs",
+      "fields": [
+        {
+          "label": "Scent Trails Identified By Dog",
+          "name": "scentTrailsIdentifiedByDog",
+          "type": "textarea",
+          "placeholder": "Scent Trails Identified By Dog"
+        },
+        {
+          "label": "Supporting Evidence Found (Tracks, Sign, Clues)",
+          "name": "supportingEvidenceFound",
+          "type": "textarea",
+          "placeholder": "Supporting Evidence Found (Tracks, Sign, Clues)"
+        },
+        {
+          "label": "Why and Where the Scent Trail Ended",
+          "name": "whyAndWhereTheScentTrailEnded",
+          "type": "textarea",
+          "placeholder": "Why and Where the Scent Trail Ended"
+        },
+        {
+          "label": "Describe the Scent Article, its Quality and Usability",
+          "name": "describeScentArticle",
+          "type": "textarea",
+          "placeholder": "Describe the Scent Article, its Quality and Usability"
+        },
+        {
+          "label": "Describe the Current Location and Usability of the Scent Article",
+          "name": "describeTheCurrentLocationAndUsability",
+          "type": "textarea",
+          "placeholder": "Describe the Current Location and Usability of the Scent Article"
+        }
+      ]
+    },
+    {
+      "heading": "Debrief Info ",
+      "fields": [
+        { 
+          "label": "Debriefer",
+          "name": "debriefer",
+          "type": "text",
+          "placeholder": "Debriefer"
+        },
+        {
+          "label": "Date Prepared",
+          "name": "datePrepared",
+          "type": "date"
+        },
+        {
+          "label": "Time Prepared",
+          "name": "timePrepared",
+          "type": "time"
+        }
+      ]
+    }
+  ]
+}
