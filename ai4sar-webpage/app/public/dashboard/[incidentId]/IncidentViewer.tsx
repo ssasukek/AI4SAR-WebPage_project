@@ -6,9 +6,12 @@ import "../dashboard.css";
 
 type Incident = {
   id: string;
-  name?: string;
-  incidentNumber?: string | number;
-  incidentDate?: string;
+
+  data?: {
+    incidentName?: string;
+    incidentNumber?: string | number;
+    incidentDate?: string;
+  };
 
   subject?: {
     name?: string;
@@ -71,7 +74,7 @@ export default function IncidentViewer({ incidentId }: { incidentId: string }) {
     };
   }, [incidentId]);
 
-  const title = incident?.name;
+  const title = incident?.data?.incidentName ?? "";
 
   return (
     <div className="page">

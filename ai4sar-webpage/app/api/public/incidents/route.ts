@@ -5,7 +5,7 @@ export async function GET() {
     {
       id: "demo1",
       data: {
-        incidentName: "3 year old missing by river.",
+        incidentName: "3 year old missing by river",
         incidentNumber: "",
         incidentDate: "2025-04-16",
       },

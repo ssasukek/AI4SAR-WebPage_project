@@ -5,19 +5,25 @@ export async function GET(
   _req: Request,
   { params }: { params: { incidentId: string } },
 ) {
+  const { incidentId } = await params;
   // placeholder so your UI compiles
-  return NextResponse.json([
-    {
+  const demo: Record<string, any> = {
+    demo1: {
       id: "demo1",
-      name: "3 year old missing by river.",
-      incidentNumber: "",
-      incidentDate: "2025-04-16",
+      data: {
+        incidentName: "3 year old missing by river.",
+        incidentNumber: "",
+        incidentDate: "2025-04-16",
+      },
+      subject: {},
+      clues: {},
     },
-    {
-      id: "demo2",
-      name: "Baltimore Harbor Rescue",
-      incidentNumber: "7483",
-      incidentDate: "2024-04-05",
-    },
-  ]);
+  };
+
+  const item = demo[incidentId];
+  if (!item) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  return NextResponse.json(item);
 }
