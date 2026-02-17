@@ -11,3 +11,5 @@ The Dashboard is the main “mission control” screen for AI4SAR. It’s design
 - Suggested actions: A lightweight “Next Actions” or “Recommendations” panel that highlights what a coordinator might do next (e.g., review new tip, confirm last known point, assign team), with emphasis on transparency/explainability.
 
 - Layout + style: Minimal, modern, dark theme with subtle borders/glass panels and generous spacing. The page avoids clutter and prioritizes readability and hierarchy over dense data tables.
+
+- 

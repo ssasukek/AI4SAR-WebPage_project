@@ -1,7 +1,5 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-
 export default function AboutPage() {
   return (
     <div className="page">
