@@ -71,16 +71,16 @@ export default function IncidentViewer({ incidentId }: { incidentId: string }) {
     };
   }, [incidentId]);
 
-  const title = incident?.name ?? "Incident";
+  const title = incident?.name;
 
   return (
     <div className="page">
       <main className="content">
         <section className="hero" style={{ textAlign: "center" }}>
-          <h1>Incidents</h1>
+          <h1>{title}</h1>
         </section>
 
-        {/* Tabs: only Dashboard + AI Insight */}
+        {/* Tabs: Dashboard + AI Insight */}
         <div className="viewer-tabs">
           <Link
             className="viewer-tab active"
@@ -102,7 +102,6 @@ export default function IncidentViewer({ incidentId }: { incidentId: string }) {
           <div className="viewer-loading">Incident not found.</div>
         ) : (
           <div className="viewer-grid">
-            {/* Subject */}
             <Panel title="">
               <div className="viewer-subject">
                 <div className="viewer-photo">
@@ -138,7 +137,6 @@ export default function IncidentViewer({ incidentId }: { incidentId: string }) {
               </div>
             </Panel>
 
-            {/* Clues */}
             <Panel title="Clues">
               <div className="viewer-box">
                 <div className="viewer-row">
@@ -168,17 +166,14 @@ export default function IncidentViewer({ incidentId }: { incidentId: string }) {
               </div>
             </Panel>
 
-            {/* Map */}
             <Panel title="Map">
               <div className="viewer-map">No coordinates to display</div>
             </Panel>
 
-            {/* Resources */}
             <Panel title="Resources">
               <div className="viewer-muted">No resources to display</div>
             </Panel>
 
-            {/* Timeline */}
             <Panel title="Timeline">
               <div className="viewer-box">
                 <div className="viewer-row">
@@ -199,7 +194,6 @@ export default function IncidentViewer({ incidentId }: { incidentId: string }) {
               </div>
             </Panel>
 
-            {/* Weather */}
             <Panel title="Weather">
               <div className="viewer-weather">Weather unavailable</div>
             </Panel>
