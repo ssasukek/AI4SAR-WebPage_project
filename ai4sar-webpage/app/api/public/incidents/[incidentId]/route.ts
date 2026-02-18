@@ -1,30 +1,32 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { adminDb } from "@/lib/firebase-admin";
 
-// TODO: replace with real Firestore fetch (server-side) once you have their config/service account.
 export async function GET(
   _req: NextRequest,
   context: { params: Promise<{ incidentId: string }> },
 ) {
   const { incidentId } = await context.params;
-  // placeholder so your UI compiles
-  const demo: Record<string, any> = {
-    demo1: {
-      id: "demo1",
-      data: {
-        incidentName: "3 year old missing by river.",
-        incidentNumber: "",
-        incidentDate: "2025-04-16",
-      },
-      subject: {},
-      clues: {},
-    },
-  };
+  try {
+    const docRef = adminDb.collection("incidents").doc(incidentId);
+    const snap = await docRef.get();
 
-  const item = demo[incidentId];
-  if (!item) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    if (!snap.exists) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    const data = snap.data();
+
+    // Return only fields for public viewer
+    return NextResponse.json({
+      id: snap.id,
+      incidentName: data?.incidentName ?? "",
+      incidentNumber: data?.incidentNumber ?? "",
+      incidentDate: data?.incidentDate ?? "",
+      // add fields here if needed
+    });
+  } catch (error) {
+    console.error("Firestore error:", error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
-
-  return NextResponse.json(item);
 }

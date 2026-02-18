@@ -6,12 +6,9 @@ import "../dashboard.css";
 
 type Incident = {
   id: string;
-
-  data?: {
-    incidentName?: string;
-    incidentNumber?: string | number;
-    incidentDate?: string;
-  };
+  incidentName?: string;
+  incidentNumber?: string | number;
+  incidentDate?: string;
 
   subject?: {
     name?: string;
@@ -74,11 +71,11 @@ export default function IncidentViewer({ incidentId }: { incidentId: string }) {
     };
   }, [incidentId]);
 
-  const title = incident?.data?.incidentName ?? "";
+  const title = incident?.incidentName ?? "Incident";
 
   return (
     <div className="page">
-      <main className="content">
+      <main className="dash_content">
         <section className="hero" style={{ textAlign: "center" }}>
           <h1>{title}</h1>
         </section>

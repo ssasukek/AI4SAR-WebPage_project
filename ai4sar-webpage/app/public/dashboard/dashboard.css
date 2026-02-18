@@ -1,3 +1,11 @@
+.dash_content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+.dash_content .incident-grid {
+  margin-top: 18px;
+}
 .dashboard-toprow {
   display: flex;
   gap: 16px;
@@ -29,10 +37,11 @@
 
 .incident-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  padding-top: calc(.75rem + 2vw);
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+  padding-top: 32px;
 }
+
 .incident-card-btn {
   border: 0;
   background: transparent;
@@ -46,30 +55,42 @@
   border: 1px solid #d7d7d7;
   border-radius: 10px;
   overflow: hidden;
-  background: #fff;
+  background: #f4f0f0;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.incident-card-btn:hover .incident-card {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.incident-card-btn:active .incident-card {
+  transform: translateY(-1px);
 }
 
 .incident-card-top {
-  padding: 1.3rem 1.3rem;
-  height: 5rem;
+  padding: 14px 14px 12px;
+  height: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: transparent;
 }
 
 .incident-title {
   font-size: 16px;
-  font-weight: 500;
-  white-space: nowrap;
+  font-weight: 700;
+  white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .incident-card-bottom {
-  background: #073b2a;
-  color: #fff;
-  padding: 18px;
+  background: rgba(3, 69, 71, 0.1);
+  color: #111827;
+  padding: 12px 14px 14px;
   min-height: 140px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .incident-row {
@@ -200,3 +221,4 @@
   color: #fff;
   cursor: pointer;
 }
+

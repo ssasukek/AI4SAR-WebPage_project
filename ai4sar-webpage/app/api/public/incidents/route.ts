@@ -1,30 +1,23 @@
 import { NextResponse } from "next/server";
+import { adminDb } from "@/lib/firebase-admin";
 
 export async function GET() {
-  return NextResponse.json([
-    {
-      id: "demo1",
-      data: {
-        incidentName: "3 year old missing by river",
-        incidentNumber: "",
-        incidentDate: "2025-04-16",
-      },
-    },
-    {
-      id: "demo2",
-      data: {
-        incidentName: "Baltimore Harbor Rescue",
-        incidentNumber: 7483,
-        incidentDate: "2024-04-05",
-      },
-    },
-    {
-      id: "demo3",
-      data: {
-        incidentName: "Hiker overdue near trailhead",
-        incidentNumber: 9102,
-        incidentDate: "2026-02-10",
-      },
-    },
-  ]);
+  try {
+    const snapshot = await adminDb.collection("incidents").get();
+
+    const incidents = snapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        incidentName: data?.incidentName ?? "",
+        incidentNumber: data?.incidentNumber ?? "",
+        incidentDate: data?.incidentDate ?? "",
+      };
+    });
+
+    return NextResponse.json(incidents);
+  } catch (error) {
+    console.error("Firestore error:", error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
 }

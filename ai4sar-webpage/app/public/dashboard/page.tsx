@@ -12,7 +12,9 @@ type IncidentData = {
 
 type Incident = {
   id: string;
-  data: IncidentData;
+  incidentName: string;
+  incidentNumber?: string | number;
+  incidentDate?: string;
 };
 
 function IncidentCard({ incident }: { incident: Incident }) {
@@ -24,12 +26,12 @@ function IncidentCard({ incident }: { incident: Incident }) {
       className="incident-card-btn"
       onClick={() => router.push(`/public/dashboard/${incident.id}`)}
     >
-      <div className="incident-card">
+      <article className="incident-card">
         <div className="incident-card-top">
-          <div className="incident-title" title={incident.data.incidentName}>
-            {incident.data.incidentName?.length > 24
-              ? incident.data.incidentName.substring(0, 24) + "..."
-              : incident.data.incidentName}
+          <div className="incident-title" title={incident.incidentName}>
+            {incident.incidentName?.length > 24
+              ? incident.incidentName.substring(0, 24) + "..."
+              : incident.incidentName || "Untitled Incident"}
           </div>
         </div>
 
@@ -37,20 +39,20 @@ function IncidentCard({ incident }: { incident: Incident }) {
           <div className="incident-row">
             <b>Incident Name:</b>
             <br />
-            {incident.data.incidentName}
+            {incident.incidentName}
           </div>
           <div className="incident-row">
             <b>Incident Number:</b>
             <br />
-            {incident.data.incidentNumber ?? ""}
+            {incident.incidentNumber ?? ""}
           </div>
           <div className="incident-row">
             <b>Incident Date:</b>
             <br />
-            {incident.data.incidentDate ?? ""}
+            {incident.incidentDate ?? ""}
           </div>
         </div>
-      </div>
+      </article>
     </button>
   );
 }
@@ -76,7 +78,7 @@ export default function PublicDashboardPage() {
         setIncidents(data);
         setDisplay(
           [...data].sort((a, b) =>
-            a.data.incidentName.localeCompare(b.data.incidentName),
+            a.incidentName.localeCompare(b.incidentName),
           ),
         );
       } catch {
@@ -97,42 +99,42 @@ export default function PublicDashboardPage() {
   const filtered = useMemo(() => {
     const s = searchTerm.toLowerCase();
     return display.filter((x) =>
-      x.data.incidentName?.toLowerCase().includes(s),
+      x.incidentName?.toLowerCase().includes(s),
     );
   }, [display, searchTerm]);
 
   const sortedNamesASC = useMemo(
     () =>
       [...incidents].sort((a, b) =>
-        a.data.incidentName.localeCompare(b.data.incidentName),
+        a.incidentName.localeCompare(b.incidentName),
       ),
     [incidents],
   );
   const sortedNamesDESC = useMemo(
     () =>
       [...incidents].sort((a, b) =>
-        b.data.incidentName.localeCompare(a.data.incidentName),
+        b.incidentName.localeCompare(a.incidentName),
       ),
     [incidents],
   );
   const sortedDateOldest = useMemo(
     () =>
       [...incidents].sort((a, b) =>
-        (a.data.incidentDate || "").localeCompare(b.data.incidentDate || ""),
+        (a.incidentDate || "").localeCompare(b.incidentDate || ""),
       ),
     [incidents],
   );
   const sortedDateLatest = useMemo(
     () =>
       [...incidents].sort((a, b) =>
-        (b.data.incidentDate || "").localeCompare(a.data.incidentDate || ""),
+        (b.incidentDate || "").localeCompare(a.incidentDate || ""),
       ),
     [incidents],
   );
 
   return (
     <div className="page">
-      <div className="content">
+      <div className="dash_content">
         <section className="hero" style={{ textAlign: "center" }}>
           <h1>Incidents</h1>
         </section>
