@@ -12,9 +12,9 @@ export async function GET() {
       const data = doc.data();
       return {
         id: doc.id,
-        incidentName: data?.incidentName ?? "",
-        incidentNumber: data?.incidentNumber ?? "",
-        incidentDate: data?.incidentDate ?? "",
+        incidentName: data?.missingPersonName ?? "",
+        incidentNumber: data?.oesIncidentNumber ?? "",
+        incidentDate: data?.timestamp ?? "",
       };
     });
 
