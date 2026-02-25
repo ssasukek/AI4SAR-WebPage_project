@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getAdminDb } from "@/lib/firebase-admin";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   _req: NextRequest,
   context: { params: Promise<{ incidentId: string }> },
@@ -21,9 +23,9 @@ export async function GET(
     // Return only fields for public viewer
     return NextResponse.json({
       id: snap.id,
-      incidentName: data?.incidentName ?? "",
-      incidentNumber: data?.incidentNumber ?? "",
-      incidentDate: data?.incidentDate ?? "",
+      incidentName: data?.incidentName || "Unknown Incident",
+      incidentNumber: data?.incidentNumber || "N/A",
+      incidentDate: data?.timestamp || data?.incidentDate || "No Date",
       // add fields here if needed
     });
   } catch (error) {
