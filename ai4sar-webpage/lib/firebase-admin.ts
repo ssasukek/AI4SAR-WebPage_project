@@ -15,7 +15,7 @@ export function getAdminDb() {
 
     if (!projectId || !clientEmail || !privateKey) {
       throw new Error(
-        "Missing Firebase Admin environment variables at runtime.",
+        "Missing Firebase Admin environment variables at runtime",
       );
     }
 
