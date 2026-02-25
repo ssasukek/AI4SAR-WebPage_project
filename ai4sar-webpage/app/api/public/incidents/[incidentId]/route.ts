@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { adminDb } from "@/lib/firebase-admin";
+import { getAdminDb } from "@/lib/firebase-admin";
 
 export async function GET(
   _req: NextRequest,
   context: { params: Promise<{ incidentId: string }> },
 ) {
+  const adminDb = getAdminDb();
   const { incidentId } = await context.params;
   try {
     const docRef = adminDb.collection("incidents").doc(incidentId);
