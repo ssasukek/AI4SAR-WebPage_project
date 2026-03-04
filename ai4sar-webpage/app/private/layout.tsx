@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
 
 export default function PrivateLayout({
