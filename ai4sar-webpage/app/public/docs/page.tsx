@@ -3,12 +3,10 @@
 export default function AboutPage() {
   return (
     <div className="page">
-      {/* Main Content Area */}
-      <main className="content">
-        <section className="hero">
-          <h1>Documents</h1>
-          <p className="subtitle">
-          </p>
+      <main className="middle-layer">
+        <section className="hero-text" style={{ marginBottom: "10px" }}>
+          <h1 className="hero-title">Documents</h1>
+          <p className="hero-subtitle">Files</p>
         </section>
       </main>
     </div>

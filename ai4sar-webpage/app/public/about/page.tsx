@@ -2,24 +2,16 @@
 
 export default function AboutPage() {
   return (
-    <div className="page">
-      {/* Main Content Area */}
-      <main className="content">
-        <section className="hero" style={{ textAlign: "center" }}>
-          <h1>About the Project</h1>
-          <p className="subtitle">
-            Information about the team, the collaboration, and the goals of
-            AI4SAR.
+    <div className="page" style={{ display: "flex", flexDirection: "column" }}>
+      <main className="middle-layer">
+        <section className="hero-text" style={{ marginBottom: "10px" }}>
+          <h1 className="hero-title">About Us</h1>
+          <p className="hero-subtitle">
+            A collaborative effort between Cal Poly and experienced Search &
+            Rescue leaders
           </p>
         </section>
 
-        <section className="about">
-          <h2>Our Team</h2>
-          <p>[Team content placeholder...]</p>
-
-          <h2>History</h2>
-          <p>[History content placeholder...]</p>
-        </section>
       </main>
     </div>
   );

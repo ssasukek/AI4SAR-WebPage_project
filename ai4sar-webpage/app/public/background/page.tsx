@@ -3,12 +3,12 @@
 export default function BackgroundPage() {
   return (
     <div className="page">
-      <main className="content">
-        <section className="hero" style={{ textAlign: "center" }}>
-          <h1>Research Background</h1>
-          <p className="subtitle">
+      <main className="middle-layer">
+        <section className="hero-text" style={{ marginBottom: "10px" }}>
+          <h1 className="hero-title">Research Background</h1>
+          <p className="hero-subtitle">
             Deep dive into the vision, origins, technical approach, and key
-            research innovations behind AI4SAR.
+            research innovations behind AI4SAR
           </p>
         </section>
 

@@ -1,41 +1,39 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-
 export default function TeamsPage() {
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement | null>(null);
-
-  // Close menu on click outside
-  useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      if (!menuRef.current) return;
-      if (!menuRef.current.contains(e.target as Node)) setOpen(false);
-    }
-    document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
-  }, []);
-
   return (
-    <div className="page">
-      {/* Main Content */}
-      <main className="content">
-        <section className="hero">
-          <h1>Meet the Team</h1>
-          <p className="subtitle">
-            The students, faculty, and researchers behind AI4SAR.
+    <div className="page" style={{ display: "flex", flexDirection: "column" }}>
+      <main className="middle-layer">
+        <section className="hero-text" style={{ marginBottom: "10px" }}>
+          <h1 className="hero-title">Meet the Team</h1>
+          <p className="hero-subtitle">
+            The students, faculty, and researchers behind AI4SAR
           </p>
         </section>
 
         <section className="about">
-          <h2>Faculty Advisors</h2>
-          <p>[Advisor profiles placeholder...]</p>
+          <h2>Our Team</h2>
+          <p>
+            <li>
+              <strong>Dr. Franz J. Kurfess</strong> - Faculty Advisor, Cal Poly
+              CSSE
+            </li>
+            <li>
+              <strong>Gary Bloom</strong> - SAR Leader & Cal Poly Alumnus
+            </li>
+            <li>
+              <strong>Dr. Chris Young</strong> - SAR Leader & Cal Poly Alumnus
+            </li>
+            <li>
+              <strong>Dr. Bob Koester</strong> - Creator of the ISRID Data Set
+            </li>
+          </p>
 
-          <h2>Student Researchers</h2>
-          <p>[Student list placeholder...]</p>
+          <h2>History</h2>
+          <p>Started in the summer of 2021 through private funding</p>
 
-          <h2>Collaborators</h2>
-          <p>[SAR Partners placeholder...]</p>
+          <h2>Student</h2>
+          <p>...</p>
         </section>
       </main>
     </div>
