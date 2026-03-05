@@ -16,6 +16,7 @@ export default function Page() {
             card: "shadow-lg",
           },
         }}
+        routing="hash"
       />
       ;
     </div>
