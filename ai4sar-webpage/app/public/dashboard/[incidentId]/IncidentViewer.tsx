@@ -9,25 +9,27 @@ type Incident = {
   incidentName?: string;
   incidentNumber?: string | number;
   incidentDate?: string;
+  timestamp: string;
 
-  subject?: {
-    name?: string;
-    age?: string | number;
-    sex?: string;
-    height?: string;
-    weight?: string;
-    clothing?: string;
-    photoUrl?: string;
-  };
+  missingPersonName: string;
+  missingPersonAge: string;
+  missingPersonSex: string;
+  missingPersonAlert: string;
+  missingPersonPls: string;
+  photoURL: string;
 
-  clues?: {
-    date?: string;
-    time?: string;
-    team?: string;
-    initials?: string;
-    lat?: string | number;
-    long?: string | number;
-  };
+  commandPostLocation: string;
+  commandPostLatitude: string;
+  commandPostLongitude: string;
+  commandPostTelephone: string;
+
+  reportingPersonName: string;
+  reportingPersonPhone: string;
+  sheriffName: string;
+  sheriffPhoneNumber: string;
+
+  clues?: any[];
+  resources?: any[];
 };
 
 function Panel({
@@ -102,96 +104,164 @@ export default function IncidentViewer({ incidentId }: { incidentId: string }) {
           <div className="viewer-loading">Incident not found.</div>
         ) : (
           <div className="viewer-grid">
-            <Panel title="">
+            <Panel title="Missing Person Information">
               <div className="viewer-subject">
                 <div className="viewer-photo">
-                  {incident.subject?.photoUrl ? (
+                  {incident.photoURL ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={incident.subject.photoUrl} alt="Subject" />
+                    <img
+                      src={incident.photoURL}
+                      alt={incident.missingPersonName}
+                      style={{
+                        width: "100%",
+                        borderRadius: "8px",
+                        objectFit: "cover",
+                      }}
+                    />
                   ) : (
-                    <div className="viewer-photo-empty">No photo</div>
+                    <div className="viewer-photo-empty">No photo provided</div>
                   )}
                 </div>
 
                 <div className="viewer-kv">
                   <div>
-                    <b>Name:</b> {incident.subject?.name ?? "not specified"}
+                    <b>Name:</b> {incident.missingPersonName ?? "not specified"}
                   </div>
                   <div>
-                    <b>Age:</b> {incident.subject?.age ?? "not specified"}
+                    <b>Age:</b> {incident.missingPersonAge ?? "not specified"}
                   </div>
                   <div>
-                    <b>Sex:</b> {incident.subject?.sex ?? "not specified"}
+                    <b>Sex:</b> {incident.missingPersonSex ?? "not specified"}
                   </div>
                   <div>
-                    <b>Height:</b> {incident.subject?.height ?? "not specified"}
+                    <b>Alert Type:</b>{" "}
+                    {incident.missingPersonAlert ?? "not specified"}
                   </div>
                   <div>
-                    <b>Weight:</b> {incident.subject?.weight ?? "not specified"}
-                  </div>
-                  <div>
-                    <b>Clothing Description:</b>{" "}
-                    {incident.subject?.clothing ?? "not specified"}
+                    <b>Last Seen:</b>{" "}
+                    {incident.missingPersonPls ?? "not specified"}
                   </div>
                 </div>
               </div>
-            </Panel>
-
-            <Panel title="Clues">
-              <div className="viewer-box">
-                <div className="viewer-row">
-                  <b>Date:</b>
-                  <span>{incident.clues?.date ?? ""}</span>
-                </div>
-                <div className="viewer-row">
-                  <b>Time:</b>
-                  <span>{incident.clues?.time ?? ""}</span>
-                </div>
-                <div className="viewer-row">
-                  <b>Lat:</b>
-                  <span>{incident.clues?.lat ?? ""}</span>
-                </div>
-                <div className="viewer-row">
-                  <b>Long:</b>
-                  <span>{incident.clues?.long ?? ""}</span>
-                </div>
-                <div className="viewer-row">
-                  <b>Team:</b>
-                  <span>{incident.clues?.team ?? ""}</span>
-                </div>
-                <div className="viewer-row">
-                  <b>Initials:</b>
-                  <span>{incident.clues?.initials ?? ""}</span>
-                </div>
-              </div>
-            </Panel>
-
-            <Panel title="Map">
-              <div className="viewer-map">No coordinates to display</div>
-            </Panel>
-
-            <Panel title="Resources">
-              <div className="viewer-muted">No resources to display</div>
             </Panel>
 
             <Panel title="Timeline">
               <div className="viewer-box">
                 <div className="viewer-row">
-                  <b>Last Seen:</b>
-                  <span>Unknown</span>
+                  <b>Reported Missing:</b>
+                  <span>
+                    {incident.timestamp || incident.incidentDate || "Unknown"}
+                  </span>
                 </div>
                 <div className="viewer-row">
                   <b>Time Since Last Seen:</b>
                   <span>Unknown</span>
                 </div>
-                <div className="viewer-row">
-                  <b>Reported Missing:</b>
-                  <span>Unknown</span>
-                </div>
-                <div className="viewer-muted">
+                <div className="viewer-muted" style={{ marginTop: "12px" }}>
                   <b>SAR Arrived:</b> No agencies have arrived yet.
                 </div>
               </div>
+            </Panel>
+
+            <Panel title="Command Post Location">
+              <div className="viewer-box">
+                <div className="viewer-row">
+                  <b>Location:</b>
+                  <span>{incident.commandPostLocation || "TBD"}</span>
+                </div>
+                <div className="viewer-row">
+                  <b>Latitude:</b>
+                  <span>{incident.commandPostLatitude || "N/A"}</span>
+                </div>
+                <div className="viewer-row">
+                  <b>Longitude:</b>
+                  <span>{incident.commandPostLongitude || "N/A"}</span>
+                </div>
+                <div className="viewer-row">
+                  <b>CP Phone:</b>
+                  <span>{incident.commandPostTelephone || "N/A"}</span>
+                </div>
+              </div>
+              
+              {incident.commandPostLatitude && incident.commandPostLongitude ? (
+                <div
+                  style={{
+                    width: "100%",
+                    borderRadius: "8px",
+                    overflow: "hidden",
+                    border: "1px solid #374151",
+                  }}
+                >
+                  <iframe
+                    width="100%"
+                    height="300"
+                    style={{ border: 0, display: "block" }}
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://maps.google.com/maps?q=${incident.commandPostLatitude},${incident.commandPostLongitude}&z=15&output=embed`}
+                  ></iframe>
+                </div>
+              ) : (
+                <div
+                  className="viewer-muted"
+                  style={{
+                    padding: "32px",
+                    textAlign: "center",
+                    border: "1px dashed #374151",
+                    borderRadius: "8px",
+                  }}
+                >
+                  No valid coordinates available to generate map.
+                </div>
+              )}{" "}
+            </Panel>
+
+            <Panel title="Key Contacts">
+              <div className="viewer-box">
+                <div
+                  className="viewer-row"
+                  style={{
+                    borderBottom: "1px solid #374151",
+                    paddingBottom: "8px",
+                    marginBottom: "8px",
+                  }}
+                >
+                  <b>Sheriff in Charge:</b>
+                  <span>
+                    {incident.sheriffName || "N/A"} (
+                    {incident.sheriffPhoneNumber})
+                  </span>
+                </div>
+                <div className="viewer-row">
+                  <b>Reporting Person:</b>
+                  <span>
+                    {incident.reportingPersonName || "N/A"} (
+                    {incident.reportingPersonPhone})
+                  </span>
+                </div>
+              </div>
+            </Panel>
+
+            <Panel title="Clues">
+              {incident.clues && incident.clues.length > 0 ? (
+                incident.clues.map((clue, idx) => (
+                  <div
+                    key={idx}
+                    className="viewer-box"
+                    style={{ marginBottom: "8px" }}
+                  >
+                    <div className="viewer-row">
+                      <b>Item:</b> <span>{clue.item || "Unknown"}</span>
+                    </div>
+                    <div className="viewer-row">
+                      <b>Found By:</b> <span>{clue.team || "Unknown"}</span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="viewer-muted">No clues logged yet.</div>
+              )}
             </Panel>
 
             <Panel title="Weather">

@@ -26,6 +26,38 @@ export async function GET(
       incidentName: data?.incidentName || "Unknown Incident",
       incidentNumber: data?.incidentNumber || "N/A",
       incidentDate: data?.timestamp || data?.incidentDate || "No Date",
+      timestamp: data?.timestamp || "",
+      oesIncidentNumber: data?.oesIncidentNumber || "",
+      initialRadioChannel: data?.initialRadioChannel || "",
+
+      commandPostLocation: data?.commandPostLocation || "",
+      commandPostLatitude: data?.commandPostLatitude || "",
+      commandPostLongitude: data?.commandPostLongitude || "",
+      commandPostTelephone: data?.commandPostTelephone || "",
+
+      missingPersonName: data?.missingPersonName || "Unknown",
+      missingPersonAge: data?.missingPersonAge || "",
+      missingPersonSex: data?.missingPersonSex || "",
+      missingPersonAlert: data?.missingPersonAlert || "",
+      missingPersonPls: data?.missingPersonPls || "",
+      missingPersonPlsLatitude: data?.missingPersonPlsLatitude || "",
+      missingPersonPlsLongitude: data?.missingPersonPlsLongitude || "",
+      photoURL: data?.photoURL || "",
+
+      reportingPersonName: data?.reportingPersonName || "",
+      reportingPersonAddress: data?.reportingPersonAddress || "",
+      reportingPersonPhone: data?.reportingPersonPhone || "",
+      sheriffName: data?.sheriffName || "",
+      sheriffPhoneNumber: data?.sheriffPhoneNumber || "",
+
+      author: data?.author || [],
+      createdBy: data?.createdBy || "",
+      incidentPreparedBy: data?.incidentPreparedBy || "",
+      incidentDatePrepared: data?.incidentDatePrepared || "",
+      incidentTimePrepared: data?.incidentTimePrepared || "",
+      incidentPreparedData: data?.incidentPreparedData || "",
+      submitted: data?.submitted || false,
+      uid: data?.uid || "",
       // add fields here if needed
     });
   } catch (error) {
