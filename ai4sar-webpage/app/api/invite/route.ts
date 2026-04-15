@@ -10,8 +10,10 @@ const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? "")
 export async function POST(req: Request) {
   try {
     const me = await currentUser();
-    if (!me)
+
+    if (!me || !me.emailAddresses || me.emailAddresses.length === 0) {
       return NextResponse.json({ error: "Not signed in" }, { status: 401 });
+    }
 
     const myEmail = me.emailAddresses[0]?.emailAddress?.toLowerCase();
     if (!myEmail || !ADMIN_EMAILS.includes(myEmail)) {
@@ -27,6 +29,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing email" }, { status: 400 });
     }
 
+    const body = await req.json();
+    const targetEmail = body?.email?.toLowerCase().trim();
+
+    if (!targetEmail) {
+      return NextResponse.json({ error: "No email provided" }, { status: 400 });
+    }
+
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
     if (!baseUrl) {
       console.error("MISSING ENV VAR: NEXT_PUBLIC_APP_URL is not defined.");
@@ -37,11 +46,10 @@ export async function POST(req: Request) {
     }
 
     const client = await clerkClient();
-
     const invite = await client.invitations.createInvitation({
-      emailAddress: email,
+      emailAddress: targetEmail,
       ignoreExisting: true,
-      redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/public/login`
+      redirectUrl: `${baseUrl}/public/login`,
     });
 
     return NextResponse.json({ ok: true, invite });
