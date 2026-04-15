@@ -44,7 +44,7 @@ export default function HomePage() {
             <span className="feature-label">Predictive Modeling</span>
             <h2>Deep Learning</h2>
             <p> in progress... </p>
-            <Link href="/teams/deep-learning" className="feature-link">
+            <Link href="/public/deep-learning" className="feature-link">
               Explore the Model &rarr;
             </Link>
           </div>
@@ -57,7 +57,7 @@ export default function HomePage() {
             <span className="feature-label">Automated Intelligence</span>
             <h2>Agentic AI & LLMs</h2>
             <p> in progress... </p>
-            <Link href="/teams/agentic-ai" className="feature-link">
+            <Link href="/public/agentic-research" className="feature-link">
               See the AI in Action &rarr;
             </Link>
           </div>
@@ -73,7 +73,7 @@ export default function HomePage() {
             <span className="feature-label">Mapping & GIS</span>
             <h2>Heatmap Visualization</h2>
             <p> in progress... </p>
-            <Link href="/teams/visualization" className="feature-link">
+            <Link href="/public/heatmaps" className="feature-link">
               Explore Maps &rarr;
             </Link>
           </div>
