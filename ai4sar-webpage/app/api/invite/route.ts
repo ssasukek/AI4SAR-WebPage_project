@@ -13,9 +13,27 @@ export async function POST(req: Request) {
     if (!me)
       return NextResponse.json({ error: "Not signed in" }, { status: 401 });
 
+    const myEmail = me.emailAddresses[0]?.emailAddress?.toLowerCase();
+    if (!myEmail || !ADMIN_EMAILS.includes(myEmail)) {
+      console.warn(`Unauthorized invite attempt by: ${myEmail}`);
+      return NextResponse.json(
+        { error: "Unauthorized: Admin access required" },
+        { status: 403 },
+      );
+    }
+
     const { email } = await req.json();
     if (!email || typeof email !== "string") {
       return NextResponse.json({ error: "Missing email" }, { status: 400 });
+    }
+
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+    if (!baseUrl) {
+      console.error("MISSING ENV VAR: NEXT_PUBLIC_APP_URL is not defined.");
+      return NextResponse.json(
+        { error: "Server configuration error" },
+        { status: 500 },
+      );
     }
 
     const client = await clerkClient();
