@@ -1,4 +1,27 @@
 /* Global Layout */
+:root {
+  /* IntelliSAR Theme Variables */
+  --green: #154734;
+  --green-dark: #0f3220;
+  --gold: #BD8B13;
+  --gold-soft: #d9a83a;
+  
+  /* Default Dark Mode (Current Design) */
+  --bg: #0c0d0d;
+  --bg-card: #1f2933;
+  --text: #ffffff;
+  --text-muted: #9ca3af;
+  --border: #374151;
+}
+
+[data-theme='light'] {
+  --bg: #fafafa;
+  --bg-card: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #555555;
+  --border: #e5e5e5;
+}
+
 .page {
   min-height: 100vh;
   background-color: #0c0d0d;
@@ -131,6 +154,12 @@
   border-color: #60a5fa;
 }
 
+.feature-card, .person-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
 /* --- for mobile display adjustment --- */
 @media (max-width: 800px) {
   .feature-row, .feature-row.reverse {
@@ -153,6 +182,12 @@ html, body {
   margin: 0;
   padding: 0;
   background: #0c0d0d;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Bottom Bar (footer) */
