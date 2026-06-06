@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Lock } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 import "./dashboard.css";
 
 type IncidentData = {
@@ -19,6 +21,15 @@ type Incident = {
 
 function IncidentCard({ incident }: { incident: Incident }) {
   const router = useRouter();
+  const { isSignedIn } = useAuth(); // <-- Check if user is logged in
+
+  // Generate a generic operational name for public display
+  const publicName = `SAR Operation ${incident.id.substring(0, 6).toUpperCase()}`;
+
+  // Decide which name to show based on auth state
+  const displayTitle = isSignedIn
+    ? incident.incidentName || "Untitled Incident"
+    : publicName;
 
   return (
     <button
@@ -27,29 +38,44 @@ function IncidentCard({ incident }: { incident: Incident }) {
       onClick={() => router.push(`/public/dashboard/${incident.id}`)}
     >
       <article className="incident-card">
-        <div className="incident-card-top">
-          <div className="incident-title" title={incident.incidentName}>
-            {incident.incidentName?.length > 24
-              ? incident.incidentName.substring(0, 24) + "..."
-              : incident.incidentName || "Untitled Incident"}
+        <div
+          className="incident-card-top"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div className="incident-title" title={displayTitle}>
+            {displayTitle.length > 24
+              ? displayTitle.substring(0, 24) + "..."
+              : displayTitle}
           </div>
+          {/* Only show the lock icon if the user is NOT signed in */}
+          {!isSignedIn && <Lock size={16} style={{ color: "var(--gold)" }} />}
         </div>
 
         <div className="incident-card-bottom">
           <div className="incident-row">
             <b>Incident Name:</b>
             <br />
-            {incident.incidentName}
+            {isSignedIn ? (
+              incident.incidentName
+            ) : (
+              <span style={{ color: "#9ca3af", fontStyle: "italic" }}>
+                [REDACTED FOR PRIVACY]
+              </span>
+            )}
           </div>
           <div className="incident-row">
             <b>Incident Number:</b>
             <br />
-            {incident.incidentNumber ?? ""}
+            {incident.incidentNumber ?? "N/A"}
           </div>
           <div className="incident-row">
             <b>Incident Date:</b>
             <br />
-            {incident.incidentDate ?? ""}
+            {incident.incidentDate ?? "Unknown"}
           </div>
         </div>
       </article>
@@ -63,6 +89,7 @@ export default function PublicDashboardPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("Sort by Name ASC");
   const [loading, setLoading] = useState(true);
+  const { isSignedIn } = useAuth(); // <-- Get auth state for the header
 
   useEffect(() => {
     let alive = true;
@@ -98,9 +125,7 @@ export default function PublicDashboardPage() {
 
   const filtered = useMemo(() => {
     const s = searchTerm.toLowerCase();
-    return display.filter((x) =>
-      x.incidentName?.toLowerCase().includes(s),
-    );
+    return display.filter((x) => x.incidentName?.toLowerCase().includes(s));
   }, [display, searchTerm]);
 
   const sortedNamesASC = useMemo(
@@ -132,52 +157,90 @@ export default function PublicDashboardPage() {
     [incidents],
   );
 
-  return (
-    <div className="page">
-      <div className="dash_content">
-        <section className="hero" style={{ textAlign: "center" }}>
-          <h1>Incidents</h1>
-        </section>
+return (
+  <div className="page">
+    <div className="dash_content">
+      <section
+        className="hero"
+        style={{ textAlign: "center", marginBottom: "24px" }}
+      >
+        <h1>{isSignedIn ? "Incident Command Logs" : "Public Incident Logs"}</h1>
 
-        <div className="dashboard-controls">
-          <input
-            className="form-input"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search incidents..."
-          />
-
-          <select
-            className="form-select"
-            value={filter}
-            onChange={(e) => {
-              const v = e.target.value;
-              setFilter(v);
-              if (v === "Sort by Name ASC") setDisplay(sortedNamesASC);
-              if (v === "Sort by Name DESC") setDisplay(sortedNamesDESC);
-              if (v === "Sort by Oldest Date") setDisplay(sortedDateOldest);
-              if (v === "Sort by Latest Date") setDisplay(sortedDateLatest);
+        {!isSignedIn && (
+          <p
+            style={{
+              color: "var(--text-muted)",
+              fontSize: "0.9rem",
+              marginTop: "8px",
             }}
           >
-            <option>Sort by Name ASC</option>
-            <option>Sort by Name DESC</option>
-            <option>Sort by Oldest Date</option>
-            <option>Sort by Latest Date</option>
-          </select>
-        </div>
+            Viewing structural data only. Personally Identifiable Information
+            (PII) is hidden.
+          </p>
+        )}
 
-        <div className="incident-grid">
-          {loading ? (
-            <div className="viewer-loading">Loading…</div>
-          ) : filtered.length === 0 ? (
-            <div className="viewer-loading">No incidents found.</div>
-          ) : (
-            filtered.map((incident) => (
-              <IncidentCard key={incident.id} incident={incident} />
-            ))
-          )}
-        </div>
+        <p
+          style={{
+            color: "var(--text-muted)",
+            fontSize: "0.85rem",
+            marginTop: "12px",
+            fontStyle: "italic",
+          }}
+        >
+          Note: This is a public demonstration environment and is not used for
+          live operations. For the official AI4SAR operational dashboard, please
+          visit{" "}
+          <a 
+            href="https://intelisar-calpoly.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "var(--gold)", textDecoration: "underline" }}
+          >
+            here
+          </a>
+          .
+        </p>
+      </section>
+
+      <div className="dashboard-controls">
+        <input
+          className="form-input"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search incidents..."
+        />
+
+        <select
+          className="form-select"
+          value={filter}
+          onChange={(e) => {
+            const v = e.target.value;
+            setFilter(v);
+            if (v === "Sort by Name ASC") setDisplay(sortedNamesASC);
+            if (v === "Sort by Name DESC") setDisplay(sortedNamesDESC);
+            if (v === "Sort by Oldest Date") setDisplay(sortedDateOldest);
+            if (v === "Sort by Latest Date") setDisplay(sortedDateLatest);
+          }}
+        >
+          <option>Sort by Name ASC</option>
+          <option>Sort by Name DESC</option>
+          <option>Sort by Oldest Date</option>
+          <option>Sort by Latest Date</option>
+        </select>
+      </div>
+
+      <div className="incident-grid">
+        {loading ? (
+          <div className="viewer-loading">Loading…</div>
+        ) : filtered.length === 0 ? (
+          <div className="viewer-loading">No incidents found.</div>
+        ) : (
+          filtered.map((incident) => (
+            <IncidentCard key={incident.id} incident={incident} />
+          ))
+        )}
       </div>
     </div>
-  );
+  </div>
+);
 }

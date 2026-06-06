@@ -21,7 +21,10 @@ export default function HomePage() {
       <div className="story-container">
         {/* dashboard grid */}
         <section className="feature-row">
-          <div className="feature-visual" style={{ backgroundImage: "url" }} />
+          <div
+            className="feature-visual"
+            style={{ backgroundImage: "url('/img/img1.png')" }}
+          />
           <div className="feature-text">
             <span className="feature-label">Command Center</span>
             <h2>IntelliSAR Dashboard</h2>
@@ -39,11 +42,20 @@ export default function HomePage() {
 
         {/* Deep learning Grid Team */}
         <section className="feature-row reverse">
-          <div className="feature-visual" style={{ backgroundImage: "url" }} />
+          <div
+            className="feature-visual"
+            style={{ backgroundImage: "url('/img/img2.jpg')" }}
+          />
           <div className="feature-text">
             <span className="feature-label">Predictive Modeling</span>
             <h2>Deep Learning</h2>
-            <p> in progress... </p>
+            <p>
+              Powered by historical incident data from ISRID, our predictive
+              models analyze demographic and environmental factors to forecast
+              missing person behavior. This suite includes k-NN wander
+              prediction, resource estimation, and XGBoost urgency scoring to
+              help command teams deploy resources effectively.
+            </p>
             <Link href="/public/deep-learning" className="feature-link">
               Explore the Model &rarr;
             </Link>
@@ -52,11 +64,20 @@ export default function HomePage() {
 
         {/* Agentic AI Grid */}
         <section className="feature-row">
-          <div className="feature-visual" style={{ backgroundImage: "url" }} />
+          <div
+            className="feature-visual"
+            style={{ backgroundImage: "url('/img/img3.jpg')" }}
+          />
           <div className="feature-text">
             <span className="feature-label">Automated Intelligence</span>
             <h2>Agentic AI & LLMs</h2>
-            <p> in progress... </p>
+            <p>
+              Our Multi-Agent System (MAS) orchestrates specialized Large
+              Language Models to assist in real-time operational tasks. From
+              acting as an Interview Helper to synthesizing field clues, these
+              autonomous agents communicate seamlessly to provide actionable,
+              data-driven insights.
+            </p>
             <Link href="/public/agentic-research" className="feature-link">
               See the AI in Action &rarr;
             </Link>
@@ -67,12 +88,18 @@ export default function HomePage() {
         <section className="feature-row reverse">
           <div
             className="feature-visual"
-            style={{ backgroundImage: "url('/blue-gradient-bg.png')" }}
+            style={{ backgroundImage: "url('/img/img4.jpg')" }}
           />
           <div className="feature-text">
             <span className="feature-label">Mapping & GIS</span>
             <h2>Heatmap Visualization</h2>
-            <p> in progress... </p>
+            <p>
+              Transforming complex AI probability data into intuitive visual
+              search tools. This module overlays behavioral heatmaps and
+              predictive containment boundaries directly onto topographical
+              grids, optimizing search paths and guiding field teams to
+              high-probability zones.
+            </p>
             <Link href="/public/heatmaps" className="feature-link">
               Explore Maps &rarr;
             </Link>
