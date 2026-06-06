@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import "../dashboard.css";
 
+
 export default function IncidentProfilePage() {
   const params = useParams<{ incidentId: string }>();
   const incidentId = params?.incidentId;
